@@ -1,6 +1,6 @@
 ﻿using InvoiceGeneratorCollarCompany.Models;
 
-namespace InvoiceGeneratorCollarCompany
+namespace InvoiceGeneratorCollarCompany.Repositories
 {
     public interface IHomeRepository
     {

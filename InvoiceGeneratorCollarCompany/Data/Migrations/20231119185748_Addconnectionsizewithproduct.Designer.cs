@@ -4,6 +4,7 @@ using InvoiceGeneratorCollarCompany.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoiceGenerator.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119185748_Addconnectionsizewithproduct")]
+    partial class Addconnectionsizewithproduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,21 +257,6 @@ namespace InvoiceGenerator.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sizes");
-                });
-
-            modelBuilder.Entity("InvoiceGeneratorCollarCompany.Models.SizeProduct", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("sizeProducts");
                 });
 
             modelBuilder.Entity("InvoiceGeneratorCollarCompany.Models.Type", b =>
@@ -567,25 +555,6 @@ namespace InvoiceGenerator.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Type");
-                });
-
-            modelBuilder.Entity("InvoiceGeneratorCollarCompany.Models.SizeProduct", b =>
-                {
-                    b.HasOne("InvoiceGeneratorCollarCompany.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InvoiceGeneratorCollarCompany.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

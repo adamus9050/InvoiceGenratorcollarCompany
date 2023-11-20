@@ -1,9 +1,8 @@
 using InvoiceGeneratorCollarCompany.Data;
 using InvoiceGeneratorCollarCompany;
-using InvoiceGenerator.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using InvoiceGeneratorCollarCompany.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +22,7 @@ builder.Services
 builder.Services.AddControllersWithViews();
 //dependency injection Ihome repo
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
+builder.Services.AddScoped<ICrudRepository, CrudRepository>();
 var app = builder.Build();
 //Dostarczenie DbSeeder 
 using(var scope = app.Services.CreateScope())

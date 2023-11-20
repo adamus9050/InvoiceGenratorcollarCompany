@@ -20,6 +20,7 @@ namespace InvoiceGeneratorCollarCompany.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<OrderStatus> OrderStatuses { get; set; }
+        public DbSet<SizeProduct> sizeProducts { get; set; }
         public DbSet<InvoiceGeneratorCollarCompany.Models.Type> Types { get; set; }
 
 

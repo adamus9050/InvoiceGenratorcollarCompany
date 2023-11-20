@@ -2,6 +2,7 @@
 using InvoiceGeneratorCollarCompany.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using AspNetCore;
 
 namespace InvoiceGeneratorCollarCompany.Controllers
 {
@@ -18,27 +19,41 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             _homerepository = homerepository;
         }
 
-        public async Task<IActionResult> Index(string sterm="", int typeId=0, int sizeId=0)
+        public async Task<IActionResult> Index(string sterm = "", int typeId = 0, int sizeId = 0)
         {
-            IEnumerable<Product> products =await _homerepository.GetProducts(sterm,typeId,sizeId);
-            foreach(var prod in products)
+            var products = await _homerepository.GetProducts(sterm, typeId, sizeId);
+            List<ProductWithSizes> productWithSizes = new List<ProductWithSizes>();
+            foreach (var prod in products)
             {
                 var size = await _homerepository.GetSizes(prod);
-                prod.Sizes = size;
 
-                var materials= await _homerepository.GetMaterials();
-                prod.Materials = materials;
+                var productWithSize = new ProductWithSizes
+                {
+                    Id = prod.ProductId,
+                    Name = prod.ProductName,
+                    Description = prod.Description,
+                    ProductPrice = prod.ProductPrice,
+                    Image = prod.Image,
+                    Sizes = size,
+
+                };
+                productWithSizes.Add(productWithSize);
+
+                
+                //prod.Materials = materials;
             }
+            var materials = await _homerepository.GetMaterials();
             IEnumerable<InvoiceGeneratorCollarCompany.Models.Type> types = await _homerepository.TypeLabel();
 
             ProductDisplayModel productDisplay = new ProductDisplayModel
             {
-                Product = products,
-                Type= types,
-                STerm= sterm,
-                TypeId=typeId,
-                SizeId= sizeId,
-                
+                ProductSize = productWithSizes,
+                Material = materials,
+                Type = types,
+                STerm = sterm,
+                TypeId = typeId,
+                SizeId = sizeId,
+
             };
 
             return View(productDisplay);

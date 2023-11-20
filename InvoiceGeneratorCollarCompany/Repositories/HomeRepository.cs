@@ -3,7 +3,7 @@ using InvoiceGeneratorCollarCompany.Data;
 using InvoiceGeneratorCollarCompany.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceGenerator.Repositories
+namespace InvoiceGeneratorCollarCompany.Repositories
 {
     public class HomeRepository : IHomeRepository
     {
@@ -44,17 +44,16 @@ namespace InvoiceGenerator.Repositories
 
         public async Task<IEnumerable<Size>> GetSizes(Product product)
         {
-        //    var sizes = await(from size in _db.Sizes 
-        //                      where size.ProductId == product.ProductId  
-        //                      select new Size
-        //                      { 
-        //                         Id=size.Id,
-        //                         ProductId=size.ProductId,
-        //                         NameInt = size.NameInt
-        //                      }).ToListAsync();
-        //    return sizes;
-            throw new NotImplementedException();    
-            }
+            var sizes = await (from size in _db.sizeProducts
+                               where product.ProductId == size.ProductId
+                               select new Size
+                               {
+                                 Id=size.SizeId,
+                                 NameInt=size.Size.NameInt
+                               }).ToListAsync();
+            return sizes;
+           
+        }
 
         public async Task<IEnumerable<Material>> GetMaterials()
         {
