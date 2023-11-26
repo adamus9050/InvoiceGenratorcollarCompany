@@ -2,7 +2,8 @@
 using InvoiceGeneratorCollarCompany.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using AspNetCore;
+//using AspNetCore;
+using InvoiceGeneratorCollarCompany.Repositories;
 
 namespace InvoiceGeneratorCollarCompany.Controllers
 {

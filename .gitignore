@@ -1,0 +1,10 @@
+*.vsidx
+*.dll
+bin/
+Migrations/
+obj/
+*vs*
+InvoiceGeneratorCollarCompany/wwwroot/lib/bootstrap/LICENSE
+*bootstrap*
+*dist/*
+*jquery*

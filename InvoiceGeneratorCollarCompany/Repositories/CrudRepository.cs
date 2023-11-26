@@ -46,7 +46,32 @@ namespace InvoiceGeneratorCollarCompany.Repositories
             return size;
         }
 
+        //public async Task AddSizeProduct(string nameProduct, string nameSize)
+        //{
+        //    //Search(nameProduct);
+        //    var productstr = _db.Products.FindAsync(nameProduct);
+        //    var sizestr = _db.Sizes.FindAsync(nameSize);
+
+        //    SizeProduct sizeProduct =  new SizeProduct();
+        //    sizeProduct.Product = productstr;
+        //    sizeProduct.Size = sizestr;
 
 
+
+        //    _db.sizeProducts.Add(sizeProduct);
+
+        //    //return sizeProduct;
+        //}
+
+        public async Task<List<Product>> Search(string prodName)
+        {
+            var product = from m in _db.Products
+                           select m;
+
+            product = product.Where(x => x.ProductName!.Contains(prodName));
+            var productid = await product.ToListAsync();
+
+            return productid;
+        }
     }
 }
