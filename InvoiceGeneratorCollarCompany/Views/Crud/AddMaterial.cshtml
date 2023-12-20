@@ -1,0 +1,31 @@
+﻿@model Domain.Models.Material
+@{
+    ViewData["Title"] = "AddMaterial";
+}
+
+@using (Html.BeginForm("AddMaterial", "Crud", FormMethod.Post))
+{
+    @Html.ValidationSummary();
+    <div class="mb-3">
+      <label for="formGroupExampleInput" class="form-label">Nazwa Materiału</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nazwa materiału" @Html.TextBoxFor(x => x.Name)>
+    </div>
+    <div class="mb-3">
+      <label for="formGroupExampleInput2" class="form-label">Cena/m2</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Cena" @Html.TextBoxFor(x => x.Price)>
+    </div>
+    <div class="mb-3">
+      <label for="formGroupExampleInput2" class="form-label">Kolor</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Kolor" @Html.TextBoxFor(x => x.Colour)>
+    </div>
+    <div class="mb-3">
+      <label for="formGroupExampleInput2" class="form-label">Opis</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Opis" @Html.TextBoxFor(x => x.Description)>
+    </div>
+    <div class="mb-3">
+      <label for="formGroupExampleInput2" class="form-label">Zdjęcie</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Zdjęcie" @Html.TextBoxFor(x => x.ImageColour)>
+    </div>
+
+            <button type="submit">Dodaj produkt</button>
+}

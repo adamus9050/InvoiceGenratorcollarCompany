@@ -1,9 +1,8 @@
-﻿using InvoiceGeneratorCollarCompany.Models.DTOs;
-using InvoiceGeneratorCollarCompany.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-//using AspNetCore;
-using InvoiceGeneratorCollarCompany.Repositories;
+using Domain.Interfaces;
+using Application.DTOs;
+using Domain.Models;
 
 namespace InvoiceGeneratorCollarCompany.Controllers
 {
@@ -26,8 +25,12 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             List<ProductWithSizes> productWithSizes = new List<ProductWithSizes>();
             foreach (var prod in products)
             {
+                
                 var size = await _homerepository.GetSizes(prod);
+                if(size == null)
+                {
 
+                }
                 var productWithSize = new ProductWithSizes
                 {
                     Id = prod.ProductId,
@@ -44,7 +47,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                 //prod.Materials = materials;
             }
             var materials = await _homerepository.GetMaterials();
-            IEnumerable<InvoiceGeneratorCollarCompany.Models.Type> types = await _homerepository.TypeLabel();
+            IEnumerable<Domain.Models.Type> types = await _homerepository.TypeLabel();
 
             ProductDisplayModel productDisplay = new ProductDisplayModel
             {

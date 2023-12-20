@@ -1,31 +1,39 @@
-using InvoiceGeneratorCollarCompany.Data;
-using InvoiceGeneratorCollarCompany;
+using Infrastructures.Context;
+using InvoiceGeneratorCollarCompany.Seeder;
 using Microsoft.AspNetCore.Identity;
+using Infrastructures.Repositories;
+//using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.EntityFrameworkCore;
-using InvoiceGeneratorCollarCompany.Repositories;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Domain.Interfaces;
+using Infrastructures.Extesions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("InvoiceGenerator") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+//// Add services to the container.
+//var connectionString = builder.Configuration.GetConnectionString("InvoiceGenerator") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(connectionString));
+//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-//Dodanie IdentityRole do DbContext 
-builder.Services
-    .AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultUI()
-    .AddDefaultTokenProviders();
+////Dodanie IdentityRole do DbContext 
+//builder.Services
+    //.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    //.AddEntityFrameworkStores<ApplicationDbContext>()
+    //.AddDefaultUI()
+    //.AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
-//dependency injection Ihome repo
-builder.Services.AddTransient<IHomeRepository, HomeRepository>();
-builder.Services.AddScoped<ICrudRepository, CrudRepository>();
+
+
+//dodanie DBContext do porjektu
+builder.Services.AddInfrastructures(builder.Configuration);
+
+
 var app = builder.Build();
+
 //Dostarczenie DbSeeder 
-using(var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
     await DbSeeder.SeedDefaultDataAsync(scope.ServiceProvider);
 }

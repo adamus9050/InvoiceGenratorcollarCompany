@@ -1,0 +1,12 @@
+﻿ @model Domain.Models.SizeProduct;
+@{
+    ViewData["Title"] = "AddSizeToProduct";
+}
+
+@using (Html.BeginForm("AddSizeToProduct", "Crud", FormMethod.Post))
+{
+    <span>Nazwa produtku:</span> @Html.TextBoxFor(x => x.Product)
+    <span>Nazwa rozmiaru:</span> @Html.TextBoxFor(x => x.Size)
+
+    <button type="submit">Wyślij formularz</button>
+}

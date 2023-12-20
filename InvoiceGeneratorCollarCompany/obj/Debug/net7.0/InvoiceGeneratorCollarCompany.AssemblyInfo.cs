@@ -11,8 +11,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-InvoiceGeneratorCollarCompany-2c9419d2-e5bf-4b2a-a139-362d53d53823")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("asp net-InvoiceGeneratorCollarCompany-2c9419d2-e5bf-4b2a-a139-362d53d53823")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("InvoiceGeneratorCollarCompany")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

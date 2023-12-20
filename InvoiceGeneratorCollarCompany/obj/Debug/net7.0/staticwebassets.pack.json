@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\Image\\Galant.jpg"
     },
     {
+      "Id": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\Image\\N2034.jpg",
+      "PackagePath": "staticwebassets\\Image\\N2034.jpg"
+    },
+    {
       "Id": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\Image\\Pikolo.jpg",
       "PackagePath": "staticwebassets\\Image\\Pikolo.jpg"
     },

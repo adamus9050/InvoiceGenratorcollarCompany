@@ -25,36 +25,22 @@
           <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" asp-area="" asp-controller="Crud" asp-action="Index">Dodawanie rekordów/usuwanie/modyfikacja(admin)</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Operacje bazodanowe
+          </a>
+          <ul class="dropdown-menu">
+              <ol>Produkty</ol>
+              <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddProduct">Dodaj produkt</a></li>
+              <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddSizeToProduct">Przypisz rozmiar do porduktu</a></li>
+              <ol>Materiały</ol>
+              <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddMaterial">Dodaj Materiał</a></li>
+            
+
+          </ul>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-
-@*        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-         
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </li>*@
-
 
       </ul>
-@*      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>*@
       <partial name="_LoginPartial" />
     </div>
   </div>
