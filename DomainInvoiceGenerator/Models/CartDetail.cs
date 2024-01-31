@@ -13,9 +13,9 @@ namespace Domain.Models
         [Required]
         public int ProductId { get; set; }
         [Required]
-        public int MaterialId { get; set; }
+        public int MaterialId { get; set; } = default;
         public int Quantity { get; set; }
-        public int SizeId { get; set; }  //dodane sprawdzenie
+        public int SizeId { get; set; } = default; //dodane sprawdzenie
         public Size Size { get; set; }
         public Product Products{ get; set; }
         public Material Materials{ get; set; }

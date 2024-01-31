@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\Image\\Pikolo.jpg"
     },
     {
+      "Id": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\css\\StyleSheet.css",
+      "PackagePath": "staticwebassets\\css\\StyleSheet.css"
+    },
+    {
       "Id": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },

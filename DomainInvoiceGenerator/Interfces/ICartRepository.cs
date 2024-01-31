@@ -9,9 +9,10 @@ namespace Domain.Interfces
 {
     public interface ICartRepository
     {
-        public Task<int> AddItemToCart(int productId, int quantity, int materialId);
+        public Task<int> AddItemToCart(int productId, int quantity,int sizeId, int materialId);
         public Task<int> RemoveItemWithCart(int productId, int materialId);
         public Task<ShoppingCart> GetUserCart();
-        public Task<int> GetItemCart(string userId = "");
+        public Task<int> GetItemCountCart(string userId = "");
+        public Task<ShoppingCart> GetCart(string userId);
     }
 }

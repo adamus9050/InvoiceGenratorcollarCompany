@@ -176,20 +176,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/AddMaterial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxBZGRNYXRlcmlhbC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/AddProduct.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxBZGRQcm9kdWN0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/AddSizeToProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxBZGRTaXplVG9Qcm9kdWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/Material/AddMaterial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxNYXRlcmlhbFxBZGRNYXRlcmlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/Material/GetMaterialList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxNYXRlcmlhbFxHZXRNYXRlcmlhbExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/Product/AddProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxQcm9kdWN0XEFkZFByb2R1Y3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Home/NoAccessAuthorization.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOb0FjY2Vzc0F1dGhvcml6YXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Home/Privacy.cshtml]

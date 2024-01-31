@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nL4WPS57ZFxuFGpjbufRZ80snE8WE2fvVzqf0iZ2dIk=",
+  "Hash": "WEawuimz3vHVqa2S6abfPBOLLa64ZtrFzCIckamo3Ug=",
   "Source": "InvoiceGeneratorCollarCompany",
   "BasePath": "_content/InvoiceGeneratorCollarCompany",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\css\\StyleSheet.css",
+      "SourceId": "InvoiceGeneratorCollarCompany",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\",
+      "BasePath": "_content/InvoiceGeneratorCollarCompany",
+      "RelativePath": "css/StyleSheet.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\StyleSheet.css"
     },
     {
       "Identity": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\wwwroot\\favicon.ico",

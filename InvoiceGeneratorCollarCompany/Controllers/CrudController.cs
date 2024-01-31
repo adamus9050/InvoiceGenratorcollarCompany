@@ -19,13 +19,18 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             _homeRepository= homeRepository;
         
         }
-
+        //Dodawanie porduktu do bazy 
         [HttpGet]
         public async Task<IActionResult> AddProduct() 
-        {    if(!User.Identity.IsAuthenticated || User.Identity== null)
+        {   //Autoryzacja sposób 1
+            if (!User.Identity.IsAuthenticated || User.Identity == null)
             {
-                return RedirectToPage("/Account/Login", new {area = "Identity"});
-            }//to samo można zrobić za pomocą [Authorized]
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }//to samo można zrobić za pomocą [Authorized]  
+            if(!User.IsInRole("Owner"))
+            {
+                return RedirectToAction("NoAccessAuthorization","Home");
+            }       
             else
             {
                 IEnumerable<Domain.Models.Type> types = await _homeRepository.TypeLabel();
@@ -33,28 +38,52 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                 {
                     Type = types,
                 };
-                    return View(type);
+                    return View("Product/AddProduct",type);
             }
+            
 
-        }
+        } // dodanie porduktu
 
         [HttpPost]
         public async Task<IActionResult> AddProduct(Product product) 
         {
+
                 var productadd = await _crudRepository.AddProduct(product);
                 
                 TempData["Product"] = productadd;
                 return RedirectToAction("AddSizeToProduct");
-            //Dodać walidację produktu
+            //*******Dodać walidację produktu
 
         }
+  
+        [Authorize(Roles = "Owner")]
+        public async Task<IActionResult>Delete(int prodId=0,int sizeId=0,int materialId=0)
+        {
+            if(prodId > 0)
+            {
+               await _crudRepository.Delete(prodId, sizeId, materialId);
+               return RedirectToAction("Index","Home");
+            }
+            else if(sizeId >0)
+            {
+                await _crudRepository.Delete(prodId, sizeId, materialId);
+                return RedirectToAction("Delete_Size");
+            }
+            else
+            {
+                await _crudRepository.Delete(prodId, sizeId, materialId);               
+                return RedirectToAction("GetMaterialList");
+            }
+        }
 
-        [Authorize]
+        //Dodawanie materialu do bazy 
+        [Authorize(Roles = "Owner")]
         [HttpGet]
         public IActionResult AddMaterial()
         {
-            return View();
-        }
+
+            return View("Material/AddMaterial");
+        } //dodawanie materiałów
 
         [HttpPost]
         public async Task<IActionResult> AddMaterial(Material material)
@@ -63,7 +92,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             {
                 var materialadd = await _crudRepository.AddMaterial(material);
     
-                TempData["Product"] = materialadd;
+                TempData["Material"] = materialadd;
                 return RedirectToAction("AddMaterial");
             }
             else
@@ -71,13 +100,26 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                 return View();
             }
 
-            //Dodać walidację materiału
+            //*********Dodać walidację materiału
         }
 
         [HttpGet]
-        [Authorize]
+        public async Task <IActionResult> GetMaterialList()
+        {
+            var material =await _crudRepository.GetMaterialList();
+            return View("Material/GetMaterialList",material);
+
+        } // lista materiałów
+
+        //Dodawanie romzmiarów do bazy
+        [HttpGet]
+        [Authorize(Roles = "Owner")]
         public IActionResult AddSize()
         {
+            if (!User.IsInRole("Owner"))
+            {
+                return RedirectToAction("NoAccessAuthorization", "Home");
+            }
             return View();
         }
 
@@ -91,35 +133,51 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             //dodać walidację rozmiaru
         }
 
-       //dodać listowanie materiałów, produktów wraz z przypisanymi materiałami oraz rozmiarami, listowanie rozmiarów.
-
-
         [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> AddSizeToProduct()
+        [Authorize(Roles = "Owner")]
+        public async Task<IActionResult> AddSizeToProduct(int productId)
         {
-            return View();
+            var product = await _crudRepository.GetProduct(productId);
+            var prod = new Product
+            {
+                ProductId = productId,
+                ProductName = product.ProductName,
+                ProductPrice = product.ProductPrice,
+                Description = product.Description,
+                Image = product.Image
+            };
+            IEnumerable<Size> sizeList = await _crudRepository.GetSizeList();
+            var prodSize = new ProductWithSizes
+            {
+                Id = productId,
+                Name = product.ProductName,
+                ProductPrice = product.ProductPrice,
+                Description = product.Description,
+                Image = product.Image,
+                Sizes = sizeList                
+            };
+            return View(prodSize);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSizeToProduct(int product, int size)
+        public async Task<IActionResult> AddSizeToProduct(int productId, int[] selectedSize )
         {
-
-            var productSize = _crudRepository.AddSizeProduct(product, size);
-
-            TempData["Product"] = productSize;
-            return RedirectToAction("AddProduct");
+            if(productId <= 0 ) // reakcja w przypadku błędnego Id produktu
+            {
+                return BadRequest("Id produktu jest nieprawidłowe. Mniejsze bądź równe 0");
+            }
+            else
+            {
+                foreach(var sizeId in selectedSize)
+                {
+                    await _crudRepository.AddSizeProduct(productId, sizeId);
+                }
+                
+            }
+            
+            TempData["Product"] = productId;
+            return RedirectToAction("Index","Home");
         }
-
-        //public async Task<IActionResult> Search(string prodName)
-        //{
-        //    if (_crudRepository.Search == null)
-        //    {
-        //        return Problem("Nie ma takiego produktu w bazie");
-        //    }
-        //    var produkt = _crudRepository.Search(prodName);
-        //    return View(produkt);
-        //}
 
     }
 }

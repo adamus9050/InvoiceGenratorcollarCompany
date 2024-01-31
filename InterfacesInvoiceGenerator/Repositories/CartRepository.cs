@@ -7,6 +7,7 @@ using System.Security.Principal;
 using Microsoft.EntityFrameworkCore;
 using Domain.Interfces;
 using Application.DTOs;
+using Microsoft.IdentityModel.Tokens;
 //using System.Data.Entity;
 
 namespace Infrastructures.Repositories
@@ -22,7 +23,7 @@ namespace Infrastructures.Repositories
             _userManager = userManager;
             _ContextAccesor = contextAccessor;
         }
-        public async Task<int> AddItemToCart(int productId, int quantity, int materialId)
+        public async Task<int> AddItemToCart(int productId,int materialId, int sizeId, int quantity)
         {
             string userId = GetUsersId();
             using var transaction = _db.Database.BeginTransaction();
@@ -44,7 +45,7 @@ namespace Infrastructures.Repositories
                 }
                 _db.SaveChanges();
                 //cart details section
-                var cartItem = _db.CartDetails.FirstOrDefault(a => a.ShoppingCart_Id == cart.Id && a.ProductId == productId && a.MaterialId == materialId);
+                var cartItem = _db.CartDetails.FirstOrDefault(a => a.ShoppingCart_Id == cart.Id && a.ProductId == productId && a.MaterialId == materialId && a.SizeId==sizeId);
                 if (cartItem is not null)
                 {
                     cartItem.Quantity += quantity;
@@ -68,7 +69,7 @@ namespace Infrastructures.Repositories
             {
                 
             }
-            var cartItemCount = await GetItemCart(userId);
+            var cartItemCount = await GetItemCountCart(userId);
             return cartItemCount;
         }
 
@@ -110,7 +111,7 @@ namespace Infrastructures.Repositories
             {
                 
             }
-            var cartItemCount = await GetItemCart(userId);
+            var cartItemCount = await GetItemCountCart(userId);
             return cartItemCount;
         }
 
@@ -122,20 +123,21 @@ namespace Infrastructures.Repositories
                 throw new Exception("Invalid userId");
                 
             }
-            var shoppingCart = _db.ShoppingCarts.Include(a => a.CartDetails).ThenInclude(a => a.Products)    
+            var shoppingCart = _db.ShoppingCarts.Include(a => a.CartDetails)
+                .ThenInclude(a => a.Products)    
                 .Where(a => a.UserId == userId).FirstOrDefault();// tu zmiana
             return shoppingCart;
                 
         }
-        private async Task<ShoppingCart> GetCart(string userId)
+        public async Task<ShoppingCart> GetCart(string userId)
         {
             var userCart = await _db.ShoppingCarts.FirstOrDefaultAsync(u => u.UserId == userId);
             return userCart;
         }
-        //Zwraca wszystkie itemy z koszyka
-        public async Task<int> GetItemCart(string userId="")
+        //Zwraca liczbę itemów z koszyka
+        public async Task<int> GetItemCountCart(string userId="")
         {
-            if(string.IsNullOrEmpty(userId))
+            if(string.IsNullOrEmpty(userId)) 
             {
                 userId= GetUsersId();
             }
@@ -143,7 +145,7 @@ namespace Infrastructures.Repositories
                               join CartDetail in _db.CartDetails
                              on cart.CartId equals CartDetail.ShoppingCart_Id
                               select new { CartDetail.Id }).ToListAsync();
-            return data.Count;
+             return data.Count;
         }
         private string GetUsersId()
         {

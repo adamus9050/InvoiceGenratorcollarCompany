@@ -1,5 +1,4 @@
 ﻿using Domain.Models;
-using Domain.Models;
 
 namespace Domain.Interfaces
 {
@@ -9,6 +8,14 @@ namespace Domain.Interfaces
         public Task<string> AddMaterial(Material material);
         public Task<Size> AddSizes(Size size);
         public Task AddSizeProduct(int NameProduct, int nameSize);
+        public Task<Product> GetProduct(int prodId);
+        public Task<Size> GetSize(int sizeId);
+        public Task<IEnumerable<Size>> GetSizeList();
+        public Task<IEnumerable<Material>> GetMaterialList();
+        public Task<Material> GetMaterial(int materialId);
+        public Task Delete(int prodId, int sizeId,int materialId);
+
+      
        //public Task<List<Product>> Search(string prodName);
 
     }

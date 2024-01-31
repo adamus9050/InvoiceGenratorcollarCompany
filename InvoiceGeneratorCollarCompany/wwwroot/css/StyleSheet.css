@@ -1,0 +1,29 @@
+﻿
+#container{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:55px;
+    width:1000px;
+    height:auto;
+    font-size:30px;
+}
+.column1 {
+    display: block;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: left;
+    color:white;
+    float: left;
+    width:330px;
+}
+.column2 {
+    width: 330px;
+    display: block;
+    margin-left: 20px;
+    text-align: center;
+    padding-left: 10px;
+    float:left;
+}
+#footer{
+    clear:both;
+}

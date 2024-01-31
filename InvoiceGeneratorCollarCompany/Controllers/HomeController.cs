@@ -27,10 +27,6 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             {
                 
                 var size = await _homerepository.GetSizes(prod);
-                if(size == null)
-                {
-
-                }
                 var productWithSize = new ProductWithSizes
                 {
                     Id = prod.ProductId,
@@ -38,13 +34,12 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                     Description = prod.Description,
                     ProductPrice = prod.ProductPrice,
                     Image = prod.Image,
+                    Type=prod.Type,
                     Sizes = size,
 
                 };
                 productWithSizes.Add(productWithSize);
-
-                
-                //prod.Materials = materials;
+               
             }
             var materials = await _homerepository.GetMaterials();
             IEnumerable<Domain.Models.Type> types = await _homerepository.TypeLabel();
@@ -72,6 +67,10 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult NoAccessAuthorization()
+        {
+            return View("NoAccessAuthorization");
         }
     }
 }

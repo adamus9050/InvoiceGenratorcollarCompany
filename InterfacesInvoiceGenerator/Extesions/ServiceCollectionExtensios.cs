@@ -25,6 +25,7 @@ namespace Infrastructures.Extesions
 
             //Wstrzykiwanie Identity User
             services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI()
                 .AddDefaultTokenProviders();
 

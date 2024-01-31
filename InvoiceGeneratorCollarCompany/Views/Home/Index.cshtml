@@ -4,7 +4,6 @@
 
 }
 <div my-2>
-   
  <form asp-action="Index" class="row gx-3 gy-2 align-items-center">
     @* Wyszukiwanie po tytule*@
    <div class="col-sm-3">
@@ -14,7 +13,7 @@
        <input type="text" class="form-control" value="@Model.STerm" id="sterm" name="sterm" placeholder="Szukaj po nazwie produktu">
      </div>
    </div>
- @*  Wybieranie typów labelka*@
+ @* labelka wyboru typów produktu "Szukaj"*@
     <div class="col-auto">
      <label class="visually-hidden" for="typeId">Types</label>
      <select class="form-select" id="typeId" name="typeId">
@@ -34,84 +33,105 @@
   
 </div>
 
-
-     <div class="w-100 mt-4 d-flex flex-wrap">
+@*Wyświetlanie zawartości z bazy*@
+    <div class="w-100 mt-4 d-flex flex-wrap">
     @foreach (var product in Model.ProductSize)
     {
 
       <div class="card mx-2 mb-4" style="width: 16rem;">
             @if (string.IsNullOrEmpty(product.Image))
             {
-                  <img width="100%" height="300px" src="/images/NoImage.png" class="card-img-top" alt="...">       
+                  <img width="100" height="300" src="/images/NoImage.png" class="card-img-top" alt="...">       
 
             }
             else
             {
-                  <img src="/image/@product.Image" class="card-img-top" alt="...">       
+                  <img width="100" height="230" src="/image/@product.Image" class="card-img-top" alt="...">       
             }
 
           <div class="card-body ">
           <h5 class="card-title"> @product.Name</h5>
           <p class="card-text">
-                
-
-           <div class="col-auto">
-            <label class="visually-hidden" for="autoSizingSelect">Choose</label>
-
-            <select class="form-select" id="sizeId">
-              <option selected>Wybierz rozmiar</option>
+              @*Przycisk "dodaj rozmiar do produktu"*@  
+           @if(product.Sizes.Count() == 0 && User.IsInRole("Owner"))
+           {
+               <a href="@Url.Action("AddSizeToProduct", "Crud",new{productId = product.Id})">Dodaj rozmiary</a>
+           }
+           @if(product.Sizes.Count() == 0 || User.IsInRole("User"))
+           {
+               <h6>Brak rozmiarów</h6>
+           }
+           else
+           {
+             <div class="col-auto">
+              <label class="visually-hidden" for="autoSizingSelect">Choose</label>
+              <select class="form-select" id="sizeId">
               
-              @foreach(var size in product.Sizes)
-              {         
-                    @*do zrobienia: Jeśli nie ma przypisanego rozmiaru to dla nieprzypisanych rozmiarów do produktów ustaw przycisk "przypisz rozmiar"*@
-                  <option value="@size.Id">
-                  
-                   <div class="d-flex">
-                     <div class="p-2 w-100">@size.NameInt @size.Namestring</div>
-                        <div class="p-2 flex-shrink-1">
-                     </div>
-                   </div>                                    
-                  </option>                                
-              }
-            </select>
-
-             <select class="form-select" id="Material.Id">
-             <option selected>Wybierz Matriał</option>
+              <option selected>Wybierz rozmiar</option>
+                 
+                @foreach(var size in product.Sizes)
+                {                   
+                   <option value="@size.Id">                   
+                    <div class="d-flex">
+                      <div class="p-2 w-100">@size.NameInt @size.Namestring</div>
+                         <div class="p-2 flex-shrink-1">
+                      </div>
+                    </div>                                    
+                   </option>                                       
+                }
+              </select>                            
+             </div>                
+           }
+           @*Materiały*@ 
+           <div class="col-auto">
+            <select class="form-select" id="Material.Id">
+             <option selected>Wybierz Materiał</option>
               @foreach (var material in Model.Material)
               { 
               <option value="@material.MaterialId">
 
-                <div class="d-flex">
-                <div class="p-2 w-100">@material.Name @material.Colour</div>
-                <div class="p-2 flex-shrink-1">
-                </div>
-              </div>
+               <div class="d-flex">
+                 <div class="p-2 w-100">@material.Name @material.Colour</div>
+                 <div class="p-2 flex-shrink-1">
+                 </div>
+               </div>
               </option>
               }
             </select>
-            </div>  <br/>
+            </div> 
+            <br/>
                  <b>Opis:</b> @product.Description<br/>
-                 @*<b>Typ:</b>@product.Type.TypeName<br/>*@
+                 <b>Typ:</b>@product.Type.TypeName<br/>
                  <b>Cena:</b> @product.ProductPrice <br/>
           </p>
-          <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Dodaj do koszyka</button>
+          @if(User.IsInRole("Owner"))
+          {
+                    
+             <a href="@Url.Action("Delete", "Crud",new{prodId = product.Id})">Usuń prd.</a>    
+             <a href="#">Edytuj prd.</a>    
+
+          }
+                <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Dodaj do koszyka</button>
           </div>
       </div>
     }
+
+
     @section Scripts
     {
         <script>
-            alert("hello");
+            //alert("hello");
             async function add(productId)
             {
                 try{
-                    var response = await fetch('/test/AddItem?productId=${productId}');
+                     var response = await fetch(`/Cart/AddItem?productId=${productId}`);                    
                     if(response.status==200)
                     {
                         var result = await response.json();
                         console.log(result);
-                        var cartCountEl= document.getElementById(cartCount);
+                        var cartCountEl= document.getElementById("cartCount");
                         cartCountEl.innerHTML=result;
+                            window.location.href = "#cartCount";
                     }
                     
                    }
@@ -121,5 +141,4 @@
                 }
             }
         </script>
-        
     }

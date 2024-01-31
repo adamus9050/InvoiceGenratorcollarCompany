@@ -20,7 +20,7 @@ namespace InvoiceGeneratorCollarCompany.Seeder
             {
                 UserName = "adamus9050@gmail.com",
                 Email = "adamus9050@gmail.com",
-                EmailConfirmed = true
+                EmailConfirmed = true            //hasło: Password1!
 
             };
 
@@ -28,7 +28,7 @@ namespace InvoiceGeneratorCollarCompany.Seeder
 
             if (UserExistInDb is null)
             {
-                await userMgr.CreateAsync(admin, "Admin@123");
+                await userMgr.CreateAsync(admin, "adamus9050@gmail.com");
                 await userMgr.AddToRoleAsync(admin, Roles.Admin.ToString());
 
             }

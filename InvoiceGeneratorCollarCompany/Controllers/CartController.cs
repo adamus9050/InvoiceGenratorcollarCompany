@@ -15,10 +15,10 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         {
             _cartRepository = cartRepository;
         }
-        public async Task<IActionResult> AddItem(int ProductId,int materialId, int quantity=1,int redirect=0) 
+        public async Task<IActionResult> AddItem(int productId,int materialId,int sizeId, int quantity=1,int redirect=0) 
         {
 
-            var cartCount = await _cartRepository.AddItemToCart(ProductId,materialId,quantity);
+            var cartCount = await _cartRepository.AddItemToCart(productId,materialId,sizeId,quantity);
             if(redirect == 0)
             {
                 return Ok(cartCount);
@@ -38,7 +38,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         }
         public async Task<IActionResult> GetTotalItemCart() 
         {
-            int ItemCart =await _cartRepository.GetItemCart();
+            int ItemCart =await _cartRepository.GetItemCountCart();
             return Ok(ItemCart);
         }
 

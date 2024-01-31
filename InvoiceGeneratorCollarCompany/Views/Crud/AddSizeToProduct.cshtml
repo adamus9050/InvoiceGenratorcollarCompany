@@ -1,12 +1,64 @@
-﻿ @model Domain.Models.SizeProduct;
+﻿ @model Application.DTOs.ProductWithSizes;
+
 @{
-    ViewData["Title"] = "AddSizeToProduct";
+    //ViewData["Title"] = "AddSizeToProduct";
 }
+<html lang="pl">
+<head>
+       <link rel="stylesheet" href="~/css/StyleSheet.css" type="text/css">
+</head>
+ 
+<body>
+   <div id="container">        
+ @using (Html.BeginForm("AddSizeToProduct", "Crud", FormMethod.Post, new { productId = Model.Id }))
+ {
+ <div class="column1">
+   @if (string.IsNullOrEmpty(Model.Image))
+   {
+       <img width="10" height="300" src="/images/NoImage.png" alt="...">         
+   }
+   else
+   {
+       <img width="328" src="/image/@Model.Image" alt="...">       
+   }
+   <table class="table table-dark table-striped-columns">
+     <tr>
+         <td><a>Nazwa produktu:</a></td><td> @Model.Name</td> 
+     </tr>
+     <tr>
+         <td><a>Cena:</a></td><td>@Model.ProductPrice</td> 
+     </tr>
+     <tr>
+         <td><a>Opis:</a></td><td>@Model.Description</td> 
+     </tr>
+      
+   </table>
+ </div>
 
-@using (Html.BeginForm("AddSizeToProduct", "Crud", FormMethod.Post))
-{
-    <span>Nazwa produtku:</span> @Html.TextBoxFor(x => x.Product)
-    <span>Nazwa rozmiaru:</span> @Html.TextBoxFor(x => x.Size)
+ <div class="column2" float="left">
+     <h5>Aby dodać kilka rozmiarw naciśnij CTRL i zaznacz</h5>
+   <select id="Id" Name="selectedSize[]" class="form-select" aria-label="Default select example" multiple required>@*przesłanie w Name Id rozmiarów do kontrolera z sygnaturą POST*@
+          <option selected>Dodaj rozmiary</option>
+    @foreach(Size size in Model.Sizes)
+    {
 
-    <button type="submit">Wyślij formularz</button>
+      <option value=@size.Id>
+         <div class="d-flex">
+         <div class="p-2 w-100">@size.NameInt @size.Namestring</div>
+            <div class="p-2 flex-shrink-1">
+         </div>
+         </div>     
+      </option>
+                     
+    }
+   </select>
+        </div>
+     <div id="footer"> 
+                @Html.HiddenFor(Model => Model.Id)  
+              <input type="hidden" name="productId" value="@Model.Id" />
+        <button type="submit" class="btn btn-outline-light" >Dodaj rozmiary</button>
+ </div>
 }
+</div>
+</body>
+</html>

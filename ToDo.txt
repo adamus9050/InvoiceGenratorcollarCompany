@@ -1,0 +1,3 @@
+*Jeśli nie ma przypisanego rozmiaru to dla nieprzypisanych rozmiarów do produktów ustaw przycisk "przypisz rozmiar"
+*Dodawanie itemu do koszyka nie działa
+*Wyświetlanie typów produtków w index.cshtml
