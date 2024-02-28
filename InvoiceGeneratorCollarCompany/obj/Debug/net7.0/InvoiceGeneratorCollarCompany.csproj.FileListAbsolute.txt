@@ -261,12 +261,7 @@ D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollar
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.genruntimeconfig.cache
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\ref\InvoiceGeneratorCollarCompany.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\System.CodeDom.dll
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\System.Data.SqlClient.dll
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\runtimes\win-arm64\native\sni.dll
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\runtimes\win-x64\native\sni.dll
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\runtimes\win-x86\native\sni.dll
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.MvcApplicationPartsAssemblyInfo.cs

@@ -33,6 +33,7 @@ namespace Infrastructures.Extesions
             services.AddTransient<IHomeRepository, HomeRepository>();
             services.AddTransient<ICartRepository, CartRepository>();
             services.AddScoped<ICrudRepository, CrudRepository>();
+            services.AddTransient<IUserOrderRepository, UserOrderRepository>();
 
             
             services.AddMvc();

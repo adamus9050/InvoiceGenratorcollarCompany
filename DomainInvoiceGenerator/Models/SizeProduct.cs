@@ -13,5 +13,6 @@ namespace Domain.Models
 
         public int SizeId { get; set; }
         public Size Size { get; set; } = default;
+        public List<CartDetail> CartDetail { get; set; }
     }
 }

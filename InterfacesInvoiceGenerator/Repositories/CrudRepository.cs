@@ -8,6 +8,7 @@ using System.Text.Json.Nodes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
+using Azure;
 //using System.Drawing;
 
 namespace Infrastructures.Repositories
@@ -24,31 +25,38 @@ namespace Infrastructures.Repositories
         public async Task<string> AddProduct(Product product)
         {
              await _db.Products.AddAsync(product);
-            await _db.SaveChangesAsync(); 
+             await _db.SaveChangesAsync(); 
          
-                var productString = $"I.d:{product.ProductId} Nazwa:{product.ProductName} Opis:{product.Description} Cena:{product.ProductPrice}";
+             var productString = $"I.d:{product.ProductId} Nazwa:{product.ProductName} Opis:{product.Description} Cena:{product.ProductPrice}";
 
               return productString;    
         }
-        public async Task<string> AddMaterial(Material material)
-        {
-            await _db.Materials.AddAsync(material);
-            _db.SaveChangesAsync();
-
-            var materialString = $"I.d:{material.MaterialId} Nazwa:{material.Name} Opis:{material.Colour} Cena:{material.Price}";
-
-            return materialString;
-        }
         public async Task<Size> AddSizes(Size size)
         {
-            await _db.Sizes.AddAsync(size);
-            _db.SaveChangesAsync();
+            var transaction= _db.Database.BeginTransaction();
+            try
+            {
+                await _db.Sizes.AddAsync(size);
+                await _db.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch(Exception ex) 
+            {
+                string message = "Ups coś się nie powiodło. Nie udało się dodać rekrdu do bazy";
+                transaction.Rollback();
+                message += ex.ToString();
+  
+            }
+                   
 
-            return size;
+            Size sizeAdded = new Size();
+            sizeAdded.Namestring = size.Namestring;
+            sizeAdded.NameInt = size.NameInt;
+            return sizeAdded;
         }
         public async Task<Product> GetProduct(int prodId)
         {
-            var selctedProduct = _db.Products.Find(prodId);
+            var selctedProduct = await _db.Products.FindAsync(prodId);
             Product product = new Product();
             product.ProductId = prodId;
             product.ProductName=selctedProduct.ProductName;
@@ -69,7 +77,35 @@ namespace Infrastructures.Repositories
             size.Namestring = sizeSelected.Namestring;
    
             return size;
+        }    
+        public async Task<IEnumerable<Size>> GetSizeList()
+        {
+            var sizeList =await _db.Sizes.ToListAsync();
+            return sizeList;
         }
+
+        public async Task<string> AddMaterial(Material material)
+        {
+            var transaction = _db.Database.BeginTransaction();
+            try
+            {
+            await _db.Materials.AddAsync(material);
+            await _db.SaveChangesAsync();
+            await transaction.CommitAsync();
+            }
+            catch (Exception ex) 
+            {
+                string message = "Ups coś się nie powiodło. Nie udało się dodać rekrdu do bazy";
+                transaction.Rollback();
+                message = ex.ToString();
+            }
+
+
+            var materialString = $"I.d:{material.MaterialId} Nazwa:{material.Name} Opis:{material.Colour} Cena:{material.Price}";
+
+            return materialString;
+        }
+
         public async Task<IEnumerable<Material>> GetMaterialList()
         {
             var material = await _db.Materials.ToListAsync();
@@ -82,21 +118,16 @@ namespace Infrastructures.Repositories
 
         }
 
-        public async Task<IEnumerable<Size>> GetSizeList()
-        {
-            var sizeList = _db.Sizes.ToList();
-            return sizeList;
-        }
         public async Task Delete(int prodId=0,int sizeId=0, int materialId=0)
         {
             if(prodId != 0)
             {
-                var selctedProduct = _db.Products.Find(prodId);
-                var selectedsize =  from size in _db.sizeProducts
+                var selctedProduct =await _db.Products.FindAsync(prodId);
+                var selectedsize = from size in _db.sizeProducts
                                           where size.ProductId == prodId
                                           select size; // Wybranie rozmiarów przypisanych do produktu
 
-                _db.Products.Remove(selctedProduct);
+                 _db.Products.Remove(selctedProduct);
                 foreach(var item in selectedsize)
                 {
                 _db.sizeProducts.Remove(item); // usunięcie rozmiarów przypisanych do produktu
@@ -106,12 +137,12 @@ namespace Infrastructures.Repositories
             }
             if(sizeId != 0) 
             {
-                var selctedSize = _db.Sizes.Find(sizeId);
+                var selctedSize = await _db.Sizes.FindAsync(sizeId);
                 _db.Sizes.Remove(selctedSize);
             }
             if(materialId != 0) 
             {
-                var selctedMaterial = _db.Materials.Find(materialId);
+                var selctedMaterial = await _db.Materials.FindAsync(materialId);
                 _db.Materials.Remove(selctedMaterial);
             }
 
@@ -121,17 +152,15 @@ namespace Infrastructures.Repositories
         {
             if (prodId != 0)
             {
-                var selctedProduct = _db.Products.
+                
             }
             if (sizeId != 0)
             {
-                var selctedSize = _db.Sizes.Find(sizeId);
-                _db.Sizes.Remove(selctedSize);
+                
             }
             if (materialId != 0)
             {
-                var selctedMaterial = _db.Materials.Find(materialId);
-                _db.Materials.Remove(selctedMaterial);
+                
             }
 
             _db.SaveChanges();
@@ -146,20 +175,20 @@ namespace Infrastructures.Repositories
 
             _db.sizeProducts.Add(sizeproduct);
             await _db.SaveChangesAsync();
-            //using (var transaction = _db.Database.BeginTransaction())
-            //{
-            //    try
-            //    {
-            //        _db.sizeProducts.Add(sizeproduct);
-            //        _db.SaveChanges();
-            //        transaction.Commit();
-            //    }
-            //    catch (Exception)
-            //    {
-       
-            //        transaction.Rollback();
-            //    }
-            //}
+        }
+
+        public async Task<SizeProduct> GetSizeProduct(int productId, int sizeId)
+        {
+            var slectedSizeProduct = await(from sizeproduct in _db.sizeProducts where sizeproduct.ProductId== productId && sizeproduct.SizeId == sizeId
+                                    select new SizeProduct
+                                    {
+                                        Id= sizeproduct.Id,
+                                        ProductId = sizeproduct.ProductId,
+                                        SizeId = sizeproduct.SizeId,
+                                        
+
+                                    }).FirstAsync();
+            return slectedSizeProduct;
         }
 
         //public async Task<List<Product>> Search(string prodName)

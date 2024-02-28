@@ -27,7 +27,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }//to samo można zrobić za pomocą [Authorized]  
-            if(!User.IsInRole("Owner"))
+            if(!User.IsInRole("Admin"))
             {
                 return RedirectToAction("NoAccessAuthorization","Home");
             }       
@@ -51,12 +51,15 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                 var productadd = await _crudRepository.AddProduct(product);
                 
                 TempData["Product"] = productadd;
-                return RedirectToAction("AddSizeToProduct");
+            
+            //Wszystkie nowo dodane produkty przechodzą do dodania rozmiaru.
+
+                return RedirectToAction("AddSizeToProduct",product);
             //*******Dodać walidację produktu
 
         }
   
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult>Delete(int prodId=0,int sizeId=0,int materialId=0)
         {
             if(prodId > 0)
@@ -77,7 +80,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         }
 
         //Dodawanie materialu do bazy 
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult AddMaterial()
         {
@@ -88,7 +91,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMaterial(Material material)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 var materialadd = await _crudRepository.AddMaterial(material);
     
@@ -97,7 +100,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             }
             else
             {
-                return View();
+                return View("Error");
             }
 
             //*********Dodać walidację materiału
@@ -112,29 +115,36 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         } // lista materiałów
 
         //Dodawanie romzmiarów do bazy
-        [HttpGet]
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddSize()
         {
-            if (!User.IsInRole("Owner"))
+            if (!User.IsInRole("Admin"))
             {
                 return RedirectToAction("NoAccessAuthorization", "Home");
             }
-            return View();
+            return View("Size/AddSize");
         }
 
         [HttpPost]
         public async Task<IActionResult> AddSize(Size size)
         {
-            var sizeadd = await _crudRepository.AddSizes(size);
-
-            TempData["Product"] = sizeadd;
-            return RedirectToAction("AddProduct");
+           
+              var sizeadd = await _crudRepository.AddSizes(size);
+              TempData["Size"] = $" NazwaStr:{sizeadd.Namestring}{"  "}NazwaInt:{sizeadd.NameInt}";
+              return RedirectToAction("AddSize");            
             //dodać walidację rozmiaru
         }
 
         [HttpGet]
-        [Authorize(Roles = "Owner")]
+        public async Task<IActionResult> GetSizeList()
+        {
+            var sizeList =await _crudRepository.GetSizeList();
+            return View("Size/GetSizeList",sizeList);
+
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddSizeToProduct(int productId)
         {
             var product = await _crudRepository.GetProduct(productId);

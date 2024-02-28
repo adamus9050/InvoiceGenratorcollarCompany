@@ -1,20 +1,30 @@
 ﻿@model IEnumerable<Domain.Models.Material>;
 @{
-    ViewData["Title"] = "AddProduct";
+    ViewData["Title"] = "GetMaterialList";
 
 }
-@foreach (var material in Model)
+@if(Model != null)
 {
-    <li>    
-        <span>@material.Name;</span> 
-        <span>@material.Price;</span> 
-        <span>@material.Colour;</span> 
-        <span>@material.Description;</span>
-           
-        <button class="btn btn-danger" type="button">
-                <a href="@Url.Action("Delete", "Crud",new{materialId = material.MaterialId})">Usuń</a>
-        </button>
-        
-    </li>
-}  
+      @foreach (var material in Model)
+      {
+          <li>    
+              <span>@material.Name;</span> 
+              <span>@material.Price;</span> 
+              <span>@material.Colour;</span> 
+              <span>@material.Description;</span>
+                 
+              <button class="btn btn-danger" type="button">
+                      <a href="@Url.Action("Delete", "Crud",new{materialId = material.MaterialId})">Usuń</a>
+              </button>
+              <button class="btn alert-warning" type="button">
+                      <a href="@Url.Action("Delete", "Crud",new{materialId = material.MaterialId})">Edytuj</a>
+               </button>
+              
+          </li>
+    }
+}
+else
+{
+    <h3>Brak Materiałów do wyświetlnenia. Dodaj Materiały aby coś tu się znalazło</h3>
+}
 

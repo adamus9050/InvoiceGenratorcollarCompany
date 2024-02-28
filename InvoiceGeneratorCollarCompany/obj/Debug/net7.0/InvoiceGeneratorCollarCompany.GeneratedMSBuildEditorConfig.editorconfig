@@ -176,6 +176,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Cart/GetUserCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxHZXRVc2VyQ2FydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/AddSizeToProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxBZGRTaXplVG9Qcm9kdWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -190,6 +194,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/Product/AddProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxQcm9kdWN0XEFkZFByb2R1Y3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/Size/AddSize.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxTaXplXEFkZFNpemUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Crud/Size/GetSizeList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3J1ZFxTaXplXEdldFNpemVMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Programowanie/C\#/Asp.Net/InvoiceGeneratorCollarCompany/InvoiceGeneratorCollarCompany/Views/Home/Index.cshtml]

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Domain.Models.Size>
+@{
+    ViewData["Title"] = "GetSizeList";
+}
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/css/Listy.css" type="text/css"></link>
+
+</head>
+
+<body>
+    <div id="containerList">
+
+            @if (Model != null)
+            {
+                @foreach (var size in Model)
+                {
+                   <li>
+                      
+                      <span>@size.Namestring</span>
+                      <span>@size.NameInt</span>
+               
+                           <button type="button" class="alert-danger">Usuń rekord</button>                    
+                           <button type="button" class="alert-warning">Edytuj</button>
+          
+                   </li>
+                }
+            }
+            else
+            {
+              
+                <h3>Nie ma żadnych rozmiarów do wyświetlenia. Dodaj rozmiary aby coś tu się znalazło.</h3>
+              
+            }
+            
+<div id="footer"></div>
+
+
+</div>
+</body>
+</html>
+

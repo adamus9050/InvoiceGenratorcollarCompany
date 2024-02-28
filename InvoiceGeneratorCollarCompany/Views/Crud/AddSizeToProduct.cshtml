@@ -37,7 +37,7 @@
 
  <div class="column2" float="left">
      <h5>Aby dodać kilka rozmiarw naciśnij CTRL i zaznacz</h5>
-   <select id="Id" Name="selectedSize[]" class="form-select" aria-label="Default select example" multiple required>@*przesłanie w Name Id rozmiarów do kontrolera z sygnaturą POST*@
+   <select id="Id" name="selectedSize[]" class="form-select" aria-label="Default select example" multiple required>@*przesłanie w Name Id rozmiarów do kontrolera z sygnaturą POST*@
           <option selected>Dodaj rozmiary</option>
     @foreach(Size size in Model.Sizes)
     {

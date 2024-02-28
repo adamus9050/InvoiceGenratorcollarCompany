@@ -1,0 +1,21 @@
+﻿@model Domain.Models.Size
+@{
+    ViewData["Title"] = "AddSize";
+}
+
+@using (Html.BeginForm("AddSize", "Crud"))
+{
+    @Html.ValidationSummary()
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label"> Nazwa string</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nazwa string" @Html.TextBoxFor(x => x.Namestring)>
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Nazwa int</label>
+              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Nazwa int" @Html.TextBoxFor(x => x.NameInt)>
+        </div>
+
+    @TempData["Size"]
+    <button type="submit">Dodaj rozmiar</button>
+}
+

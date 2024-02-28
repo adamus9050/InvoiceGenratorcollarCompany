@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-
-
 namespace Domain.Models
 {
     public class Material
@@ -23,6 +21,10 @@ namespace Domain.Models
         [Column(TypeName = "decimal(6,2)")]
         [Required(ErrorMessage = "Pole Cena jest obowiązkowe!")]
         public double Price { get; set; }
+
+        public ICollection<CartDetail> CartDetails { get; set; }
+
+
 
     }
 }

@@ -9,17 +9,18 @@ namespace Domain.Models
         
         public int Id { get; set; }
         [Required]
-        public int ShoppingCart_Id { get; set; }
+        public int ShoppingCartId { get; set; }
         [Required]
-        public int ProductId { get; set; }
+        public int SizeProductId { get; set; }
         [Required]
-        public int MaterialId { get; set; } = default;
+        public int MaterialId { get; set; }
         public int Quantity { get; set; }
-        public int SizeId { get; set; } = default; //dodane sprawdzenie
-        public Size Size { get; set; }
-        public Product Products{ get; set; }
+        public double UnitPrice { get; set; }
+        public SizeProduct SizeProducts{ get; set; }
         public Material Materials{ get; set; }
         public ShoppingCart ShoppingCart { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+
 
     }
 }

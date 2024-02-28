@@ -34,6 +34,8 @@
 </div>
 
 @*Wyświetlanie zawartości z bazy*@
+<div id="container">
+  <form method="post" asp-action="AddItem" asp-controller="Cart">
     <div class="w-100 mt-4 d-flex flex-wrap">
     @foreach (var product in Model.ProductSize)
     {
@@ -52,10 +54,10 @@
           <div class="card-body ">
           <h5 class="card-title"> @product.Name</h5>
           <p class="card-text">
-              @*Przycisk "dodaj rozmiar do produktu"*@  
-           @if(product.Sizes.Count() == 0 && User.IsInRole("Owner"))
+              @*******Przycisk "dodaj rozmiar do produktu"*********@  
+           @if(product.Sizes.Count() == 0 && User.IsInRole("Admin"))
            {
-               <a href="@Url.Action("AddSizeToProduct", "Crud",new{productId = product.Id})">Dodaj rozmiary</a>
+               <a class="accordion-button" href="@Url.Action("AddSizeToProduct", "Crud",new{productId = product.Id})">Dodaj rozmiary</a>
            }
            @if(product.Sizes.Count() == 0 || User.IsInRole("User"))
            {
@@ -65,10 +67,9 @@
            {
              <div class="col-auto">
               <label class="visually-hidden" for="autoSizingSelect">Choose</label>
-              <select class="form-select" id="sizeId">
+              <select class="form-select" id="sizeId_@product.Id" name="sizeId">
               
-              <option selected>Wybierz rozmiar</option>
-                 
+              <option selected disabled>Wybierz rozmiar</option>                
                 @foreach(var size in product.Sizes)
                 {                   
                    <option value="@size.Id">                   
@@ -82,20 +83,22 @@
               </select>                            
              </div>                
            }
-           @*Materiały*@ 
+
+           @*****Materiały******@ 
            <div class="col-auto">
-            <select class="form-select" id="Material.Id">
-             <option selected>Wybierz Materiał</option>
+            <select class="form-select" id="materialId_@product.Id" name="materialId">
+
+             <option selected disabled>Wybierz Materiał</option>
               @foreach (var material in Model.Material)
               { 
-              <option value="@material.MaterialId">
-
-               <div class="d-flex">
-                 <div class="p-2 w-100">@material.Name @material.Colour</div>
-                 <div class="p-2 flex-shrink-1">
+                <option value="@material.MaterialId">
+                
+                 <div class="d-flex">
+                   <div class="p-2 w-100">@material.Name @material.Colour</div>
+                   <div class="p-2 flex-shrink-1">
+                   </div>
                  </div>
-               </div>
-              </option>
+                </option>
               }
             </select>
             </div> 
@@ -104,27 +107,41 @@
                  <b>Typ:</b>@product.Type.TypeName<br/>
                  <b>Cena:</b> @product.ProductPrice <br/>
           </p>
-          @if(User.IsInRole("Owner"))
+          @*możliwość usuwania i update produktu dla właściciela*@
+          @if(User.IsInRole("Admin"))
           {
                     
-             <a href="@Url.Action("Delete", "Crud",new{prodId = product.Id})">Usuń prd.</a>    
+             <button type="submit"><a href="@Url.Action("Delete", "Crud",new{prodId = product.Id})">Usuń prd. </a></button>    
              <a href="#">Edytuj prd.</a>    
 
           }
-                <button type="button" onclick="add(@product.Id)" class="btn btn-primary">Dodaj do koszyka</button>
+
+        
+                    <input type="hidden" name="productId" value="@product.Id" />
+
+                    <button type="submit" class="btn btn-primary add-to-cart-button">Dodaj do koszyka</button>
+        
           </div>
       </div>
-    }
+    
+    }  
+  </form>
+    </div> 
 
 
-    @section Scripts
+@*    @section Scripts
     {
         <script>
             //alert("hello");
-            async function add(productId)
+            async function add(productId,materialId)
             {
-                try{
-                     var response = await fetch(`/Cart/AddItem?productId=${productId}`);                    
+                var usernameEl = document.getElementById("username");
+                if(usernameEl == null)
+                {
+                    window.location.href="/Identity/Account/Login";
+                }
+              try{
+                    var response = await fetch(`/Cart/AddItem?productId=${productId}&materialId=${materialId}`);                    
                     if(response.status==200)
                     {
                         var result = await response.json();
@@ -134,11 +151,12 @@
                             window.location.href = "#cartCount";
                     }
                     
-                   }
+                }
                 catch(err)
                 {
                     console.log(err)
                 }
             }
         </script>
-    }
+    }*@
+    

@@ -18,9 +18,6 @@ namespace Domain.Models
         public string? Image { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public List<OrderDetail> OrderDetail { get; set; }
-        public List<CartDetail> CartDetail { get; set; }
-
 
         public int TypeId { get; set; }
 
@@ -29,7 +26,6 @@ namespace Domain.Models
         
         [NotMapped]
         public string TypeName { get; set; }
-        public IEnumerable<Material> Materials { get; set; }
 
     }
 }

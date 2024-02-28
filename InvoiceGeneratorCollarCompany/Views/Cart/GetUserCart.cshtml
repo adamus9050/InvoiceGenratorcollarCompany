@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Domain.Models.CartDetail>
+@{
+    ViewData["Title"] = "GetUserCart";
+}
+
+<div style="width:90%; margin:auto">
+    <h3> My Cart</h3>
+    @if (Model != null)
+    {
+        <table class="table table-bordered">
+            <tr>
+                <th>Product</th>
+                <th>zdjęcie produktu</th>
+                <th>Ilość produktów</th>
+                <th>Cena produktu</th>
+                <th>Nazwa materiału</th>
+                <th>Cena materiału za m2</th>
+                <th>Cena po przeliczeniu</th>
+            </tr>
+   
+           @foreach(var item in Model)
+        {
+            <tr>
+               <td>@item.SizeProducts.Product.ProductName</td>
+                 <td> 
+                    @if(!string.IsNullOrEmpty(item.SizeProducts.Product.Image))
+                    {
+                            <img src="~/Image/NoImage.png" style="widht: auto; height:auto"/>
+                    }
+                    else
+                    {
+                       <img src="~/Image/@item.SizeProducts.Product.Image" style="widht: auto; height:auto"/>
+
+                    }
+               </td>
+              <td>@item.Quantity</td> 
+              <td>@item.SizeProducts.Product.ProductPrice</td>
+              
+              <td>@item.Materials.Name</td>
+              <td>@item.Materials.Price</td>
+              <td>@item.SizeProducts.Product.ProductPrice * @item.Materials.Price * @item.Quantity</td>
+
+              <a class="btn btn-info" href="/Cart/AddItem?productId=@item.SizeProducts.ProductId&&redirect=1">+</a>
+              <a class="btn btn-info" href="#">-</a>
+            </tr>
+        }
+        </table>
+        <div class="my-2">
+            <h5>Total Price:</h5> @(Model.Select(item => item.SizeProducts.Product.ProductPrice * item.Quantity).Sum());
+        </div>
+
+        <div class="my-2">
+            <a class="btn btn-primary" href="#">Checkout</a>    
+        </div>
+    }
+    else
+    {
+        <h5> Cart is empty</h5>
+    }
+
+</div>
+
+

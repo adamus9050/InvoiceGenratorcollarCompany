@@ -24,23 +24,30 @@
         <li class="nav-item">
           <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
         </li>
-        @if(User.IsInRole("Owner"))
+        @if(User.IsInRole("Admin"))
         {
         <li class="nav-item dropdown">
+         
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Operacje bazodanowe
           </a>
+
           <ul class="dropdown-menu">
-              <ol>Produkty</ol>
+
+              <ol><h5>Produkty</h5></ol>
               <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddProduct">Dodaj produkt</a></li>
-              <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddSizeToProduct">Przypisz rozmiar do porduktu</a></li>
-              <ol>Materiały</ol>
+
+              <ol><h5>Materiały</h5></ol>
               <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddMaterial">Dodaj Materiał</a></li>
               <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="GetMaterialList">Lista Materiałów</a></li>
-            
+
+               <ol><h5>Rozmiary</h5></ol>
+               <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="AddSize">Dodaj rozmiary</a></li>
+               <li><a class="nav-link" asp-area="" asp-controller="Crud" asp-action="GetSizeList">Lista rozmiarów</a></li>
+               
           </ul>
         </li>                        
-         }
+        }
 
 
       </ul>
@@ -61,13 +68,6 @@
         loadCartCount();
         async function loadCartCount()
             {
-                var usernameEl= document.getElementById("username");
-                console.log(usernameEl)
-                var username = usernameEl.innerText;
-                if(username.length < 1)
-                {
-                    window.location.href="Identity/Acount/Login";
-                }
                 try{
                         var response = await fetch('/Cart/GetTotalItemCart');
                         console.log(response);
@@ -75,8 +75,8 @@
                     {
                         var result = await response.json();
                         console.log(result);
-                        var cartCountEl= document.getElementById(cartCount);
-                        cartCountEl.innerHTML=result;
+                        var cartCountEl= document.getElementById("cartCount");
+                        cartCountEl.innerHTML = result;
                     }
 
                    }
