@@ -79,7 +79,7 @@ namespace Infrastructures.Repositories
             var cartItemCount = await GetItemCountCart(userId);
             return cartItemCount;
         }
-        public async Task<int> RemoveItemWithCart(int productId, int materialId)
+        public async Task<int> RemoveItemWithCart(SizeProduct sizeproductId, int materialId,int sizeId)
         {
             string userId = GetUsersId();
             try
@@ -96,8 +96,8 @@ namespace Infrastructures.Repositories
                 }
                 _db.SaveChanges();
                 //cart details section
-                var cartItem = _db.CartDetails.FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.SizeProductId == productId && a.MaterialId == materialId); //nie działa prawidłowo do zmiany 
-                if (cartItem is null)
+                var cartItem = _db.CartDetails.FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.SizeProductId == sizeproductId.Id && a.MaterialId == materialId); //nie działa prawidłowo do zmiany 
+                if (cartItem is null)                         
                 {
                     throw new Exception("Brak produktów w koszyku");
                 }

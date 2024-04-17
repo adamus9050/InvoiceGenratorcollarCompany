@@ -31,9 +31,9 @@ namespace Infrastructures.Extesions
 
             //Wstrzykiwanie Interfejsów
             services.AddTransient<IHomeRepository, HomeRepository>();
-            services.AddTransient<ICartRepository, CartRepository>();
-            services.AddScoped<ICrudRepository, CrudRepository>();
-            services.AddTransient<IUserOrderRepository, UserOrderRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddTransient<ICrudRepository, CrudRepository>();
+            services.AddScoped<IUserOrderRepository, UserOrderRepository>();
 
             
             services.AddMvc();

@@ -31,9 +31,10 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             }
             return RedirectToAction("GetUserCart");
         }
-        public async Task<IActionResult> RemoveItem(int productId, int materialId)
+        public async Task<IActionResult> RemoveItem(int productId, int materialId, int sizeId)
         {
-            var cartCount = await _cartRepository.RemoveItemWithCart(productId, materialId);
+            var sizeproduct = await _crudRepository.GetSizeProduct(productId, sizeId);
+            await _cartRepository.RemoveItemWithCart(sizeproduct, materialId,sizeId);
 
             return RedirectToAction("GetUserCart");
         }

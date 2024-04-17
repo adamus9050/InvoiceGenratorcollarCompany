@@ -1,10 +1,4 @@
-using Infrastructures.Context;
 using InvoiceGeneratorCollarCompany.Seeder;
-using Microsoft.AspNetCore.Identity;
-using Infrastructures.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Domain.Interfaces;
 using Infrastructures.Extesions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-//dodanie DBContext do porjektu
+//dodanie Infrastruktury do porjektu
 builder.Services.AddInfrastructures(builder.Configuration);
 
 

@@ -179,12 +179,12 @@ namespace Infrastructures.Repositories
 
         public async Task<SizeProduct> GetSizeProduct(int productId, int sizeId)
         {
-            var slectedSizeProduct = await(from sizeproduct in _db.sizeProducts where sizeproduct.ProductId== productId && sizeproduct.SizeId == sizeId
+            var slectedSizeProduct = await(from productWithSize in _db.sizeProducts where productWithSize.ProductId== productId && productWithSize.SizeId == sizeId
                                     select new SizeProduct
                                     {
-                                        Id= sizeproduct.Id,
-                                        ProductId = sizeproduct.ProductId,
-                                        SizeId = sizeproduct.SizeId,
+                                        Id= productWithSize.Id,
+                                        ProductId = productWithSize.ProductId,
+                                        SizeId = productWithSize.SizeId,
                                         
 
                                     }).FirstAsync();

@@ -10,7 +10,7 @@ namespace Domain.Interfces
     public interface ICartRepository
     {
         public Task<int> AddItemToCart(SizeProduct sizeproductId,int materialId, int quantity);
-        public Task<int> RemoveItemWithCart(int productId, int materialId);
+        public Task<int> RemoveItemWithCart(SizeProduct productId, int materialId,int sizeId);
         public Task<IEnumerable<CartDetail>> GetUserCart();
         public Task<int> GetItemCountCart(string userId = "");
         public Task<ShoppingCart> GetCart(string userId);

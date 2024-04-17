@@ -254,7 +254,6 @@ D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollar
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\scopedcss\bundle\InvoiceGeneratorCollarCompany.styles.css
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\scopedcss\projectbundle\InvoiceGeneratorCollarCompany.bundle.scp.css
-D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.csproj.CopyComplete
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\refint\InvoiceGeneratorCollarCompany.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.pdb
@@ -265,3 +264,5 @@ D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollar
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\bin\Debug\net7.0\Mono.TextTemplating.dll
 D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.MvcApplicationPartsAssemblyInfo.cs
+D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceGeneratorCollarCompany.sourcelink.json
+D:\Programowanie\C#\Asp.Net\InvoiceGeneratorCollarCompany\InvoiceGeneratorCollarCompany\obj\Debug\net7.0\InvoiceG.04367558.Up2Date

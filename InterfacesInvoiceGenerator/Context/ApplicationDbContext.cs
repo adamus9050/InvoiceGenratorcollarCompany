@@ -12,7 +12,11 @@ namespace Infrastructures.Context
             : base(options)
         {
         }
-        
+
+        public ApplicationDbContext()
+        {
+        }
+
         //Asp Identity do DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

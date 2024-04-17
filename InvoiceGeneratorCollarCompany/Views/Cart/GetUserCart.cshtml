@@ -19,7 +19,7 @@
             </tr>
    
            @foreach(var item in Model)
-        {
+           {
             <tr>
                <td>@item.SizeProducts.Product.ProductName</td>
                  <td> 
@@ -38,12 +38,11 @@
               
               <td>@item.Materials.Name</td>
               <td>@item.Materials.Price</td>
-              <td>@item.SizeProducts.Product.ProductPrice * @item.Materials.Price * @item.Quantity</td>
-
-              <a class="btn btn-info" href="/Cart/AddItem?productId=@item.SizeProducts.ProductId&&redirect=1">+</a>
-              <a class="btn btn-info" href="#">-</a>
+                    <td>@(Model.Select(item => item.SizeProducts.Product.ProductPrice * item.Materials.Price * item.Quantity).Sum())</td>@* Cena po przeliczeniu *@
+                    <td><a class="btn btn-info" href="/Cart/AddItem?productId=@item.SizeProducts.ProductId&&materialId=@item.MaterialId&&sizeId=@item.SizeProducts.SizeId&&redirect=1">+</a></td>
+                    <td><a class="btn btn-info" href="/Cart/RemoveItem?productId=@item.SizeProducts.ProductId&&materialId=@item.MaterialId&&sizeId=@item.SizeProducts.SizeId&&redirect=1">-</a></td>
             </tr>
-        }
+           }
         </table>
         <div class="my-2">
             <h5>Total Price:</h5> @(Model.Select(item => item.SizeProducts.Product.ProductPrice * item.Quantity).Sum());
