@@ -10,6 +10,7 @@ using Domain.Models;
 using Infrastructures.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Infrastructures.Context.Data;
 
 
 namespace Infrastructures.Repositories
@@ -18,10 +19,10 @@ namespace Infrastructures.Repositories
     {
         private readonly ApplicationDbContext _db;
         private readonly IHttpContextAccessor _ContextAccesor;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<InvoiceGeneratorCollarCompanyContext> _userManager;
 
 
-        public UserOrderRepository(ApplicationDbContext db, IHttpContextAccessor contextAccessor,UserManager<IdentityUser> userManager) 
+        public UserOrderRepository(ApplicationDbContext db, IHttpContextAccessor contextAccessor,UserManager<InvoiceGeneratorCollarCompanyContext> userManager) 
         {
             _db = db;
             _ContextAccesor = contextAccessor;  

@@ -1,8 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +7,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using InvoiceGeneratorCollarCompany.Areas.Constants;
+using Infrastructures.Context.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,24 +21,25 @@ namespace InvoiceGenerator.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<InvoiceGeneratorCollarCompanyContext> _signInManager;
+        private readonly UserManager<InvoiceGeneratorCollarCompanyContext> _userManager;
+        private readonly IUserStore<InvoiceGeneratorCollarCompanyContext> _userStore;
+        private readonly IUserEmailStore<InvoiceGeneratorCollarCompanyContext> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<InvoiceGeneratorCollarCompanyContext> userManager,
+            IUserStore<InvoiceGeneratorCollarCompanyContext> userStore,
+            SignInManager<InvoiceGeneratorCollarCompanyContext> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender )
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
+
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -71,19 +69,38 @@ namespace InvoiceGenerator.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Required]
+            [StringLength(25,MinimumLength =3)]
+            public string Name { get; set; }
+
+            [Display(Name = "Surname")]
+            [Required]
+            public string Surname { get; set; }
+
+            [Required]
+            [Display(Name = "Company Name")]
+            public string CompanyName { get; set; }
+
+            [Required]
+            public string Street { get; set; }
+
+            [Required]
+            public string NumberOf { get; set; }
+
+            [Required]
+            public string PostCode { get; set; }
+
+            [Required]
+            [StringLength(9, MinimumLength = 9)]
+            public string PhoneNumber { get; set; }
+
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -111,9 +128,16 @@ namespace InvoiceGenerator.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.Name = Input.Name;
+                user.Surname = Input.Surname;
+                user.CompanyName = Input.CompanyName;
+                user.Street = Input.Street;
+                user.NumberOf = Input.NumberOf;
+                user.PostCode = Input.PostCode;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -157,27 +181,27 @@ namespace InvoiceGenerator.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private InvoiceGeneratorCollarCompanyContext CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<InvoiceGeneratorCollarCompanyContext>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(InvoiceGeneratorCollarCompanyContext)}'. " +
                     $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<InvoiceGeneratorCollarCompanyContext> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<InvoiceGeneratorCollarCompanyContext>)_userStore;
         }
     }
 }

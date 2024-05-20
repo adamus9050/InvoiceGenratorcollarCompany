@@ -9,17 +9,16 @@ using Domain.Interfces;
 using Application.DTOs;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
-using System.Data.Entity.Infrastructure.Interception;
-
+using Infrastructures.Context.Data;
 
 namespace Infrastructures.Repositories
 {
     public class CartRepository : ICartRepository
     {
         private readonly ApplicationDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<InvoiceGeneratorCollarCompanyContext> _userManager;
         private readonly IHttpContextAccessor _ContextAccesor;
-        public CartRepository(ApplicationDbContext db, UserManager<IdentityUser> userManager, IHttpContextAccessor contextAccessor)
+        public CartRepository(ApplicationDbContext db, UserManager<InvoiceGeneratorCollarCompanyContext> userManager, IHttpContextAccessor contextAccessor)
         {
             _db = db;
             _userManager = userManager;

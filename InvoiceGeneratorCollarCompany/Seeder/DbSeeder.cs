@@ -1,4 +1,5 @@
-﻿using InvoiceGeneratorCollarCompany.Areas.Constants;
+﻿using Infrastructures.Context.Data;
+using InvoiceGeneratorCollarCompany.Areas.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +9,7 @@ namespace InvoiceGeneratorCollarCompany.Seeder
     {
         public static async Task SeedDefaultDataAsync(IServiceProvider service)
         {
-            var userMgr = service.GetService<UserManager<IdentityUser>>();
+            var userMgr = service.GetService<UserManager<InvoiceGeneratorCollarCompanyContext>>();
             var roleMgr = service.GetService<RoleManager<IdentityRole>>();
 
             //dodanie ról do bazy danych
@@ -16,7 +17,7 @@ namespace InvoiceGeneratorCollarCompany.Seeder
             await roleMgr.CreateAsync(new IdentityRole(Roles.User.ToString()));
 
             //logika tworzenia admina i usera
-            var admin = new IdentityUser
+            var admin = new InvoiceGeneratorCollarCompanyContext
             {
                 UserName = "adamus9050@gmail.com",
                 Email = "adamus9050@gmail.com",

@@ -1,39 +1,40 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj": {}
+    "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj": {}
   },
   "projects": {
-    "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj": {
+    "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj",
+        "projectUniqueName": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\obj\\",
+        "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj",
+        "packagesPath": "C:\\Users\\Czaruś\\.nuget\\packages\\",
+        "outputPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Czaruś\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\DomainInvoiceGenerator\\Domain.csproj": {
-                "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\DomainInvoiceGenerator\\Domain.csproj"
+              "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\DomainInvoiceGenerator\\Domain.csproj": {
+                "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\DomainInvoiceGenerator\\Domain.csproj"
               }
             }
           }
@@ -50,12 +51,12 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             }
           },
           "imports": [
@@ -74,37 +75,38 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300-preview.24203.14/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\DomainInvoiceGenerator\\Domain.csproj": {
+    "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\DomainInvoiceGenerator\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\DomainInvoiceGenerator\\Domain.csproj",
+        "projectUniqueName": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\DomainInvoiceGenerator\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\DomainInvoiceGenerator\\Domain.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\DomainInvoiceGenerator\\obj\\",
+        "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\DomainInvoiceGenerator\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Czaruś\\.nuget\\packages\\",
+        "outputPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\DomainInvoiceGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Czaruś\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -120,26 +122,26 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             }
           },
           "imports": [
@@ -158,40 +160,41 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300-preview.24203.14/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj": {
+    "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj",
+        "projectUniqueName": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj",
         "projectName": "Infrastructures",
-        "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InterfacesInvoiceGenerator\\obj\\",
+        "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj",
+        "packagesPath": "C:\\Users\\Czaruś\\.nuget\\packages\\",
+        "outputPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InterfacesInvoiceGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Czaruś\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj": {
-                "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj"
+              "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj": {
+                "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj"
               }
             }
           }
@@ -208,42 +211,44 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNet.Identity.EntityFramework": {
-              "target": "Package",
-              "version": "[2.2.4, )"
-            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -257,62 +262,49 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300-preview.24203.14/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj": {
+    "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj",
+        "projectUniqueName": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj",
         "projectName": "InvoiceGeneratorCollarCompany",
-        "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany\\obj\\",
+        "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InvoiceGeneratorCollarCompany\\InvoiceGeneratorCollarCompany.csproj",
+        "packagesPath": "C:\\Users\\Czaruś\\.nuget\\packages\\",
+        "outputPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InvoiceGeneratorCollarCompany\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Czaruś\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj": {
-                "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\ApplicationInvoiceGenerator\\Application.csproj"
+              "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj": {
+                "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\ApplicationInvoiceGenerator\\Application.csproj"
               },
-              "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj": {
-                "projectPath": "D:\\Programowanie\\C#\\Asp.Net\\InvoiceGeneratorCollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj"
+              "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj": {
+                "projectPath": "F:\\Adaś\\Programowanie\\C#\\Asp.Net\\InvoiceGenratorcollarCompany\\InterfacesInvoiceGenerator\\Infrastructures.csproj"
               }
             }
           }
@@ -329,38 +321,44 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNet.Identity.EntityFramework": {
-              "target": "Package",
-              "version": "[2.2.4, )"
-            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[8.0.2, )"
             }
           },
           "imports": [
@@ -374,24 +372,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -400,7 +380,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300-preview.24203.14/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

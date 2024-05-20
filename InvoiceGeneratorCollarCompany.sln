@@ -11,10 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "ApplicationI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructures", "InterfacesInvoiceGenerator\Infrastructures.csproj", "{C0FF7A99-8A7B-463C-9721-318E9E94EF07}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceGenerator.IntegrationTest", "InvoiceGenerator.IntegrationTest\InvoiceGenerator.IntegrationTest.csproj", "{51D96F3B-2AF2-4DC0-BA14-231D70F269F2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceGenerator.UnitTest", "InvoiceGenerator.UnitTest\InvoiceGenerator.UnitTest.csproj", "{8F83E2B7-8AC7-4D98-9B8F-8CCAD472E3D2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,14 +33,6 @@ Global
 		{C0FF7A99-8A7B-463C-9721-318E9E94EF07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0FF7A99-8A7B-463C-9721-318E9E94EF07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0FF7A99-8A7B-463C-9721-318E9E94EF07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51D96F3B-2AF2-4DC0-BA14-231D70F269F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51D96F3B-2AF2-4DC0-BA14-231D70F269F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51D96F3B-2AF2-4DC0-BA14-231D70F269F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51D96F3B-2AF2-4DC0-BA14-231D70F269F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F83E2B7-8AC7-4D98-9B8F-8CCAD472E3D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F83E2B7-8AC7-4D98-9B8F-8CCAD472E3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F83E2B7-8AC7-4D98-9B8F-8CCAD472E3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F83E2B7-8AC7-4D98-9B8F-8CCAD472E3D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

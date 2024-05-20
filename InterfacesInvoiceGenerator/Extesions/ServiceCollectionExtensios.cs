@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces;
 using Domain.Interfces;
 using Infrastructures.Context;
+using Infrastructures.Context.Data;
 using Infrastructures.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +24,11 @@ namespace Infrastructures.Extesions
            services.AddDbContext<ApplicationDbContext>(options =>
            options.UseSqlServer(configuration.GetConnectionString("InvoiceGenerator")));
 
+            //services.AddDbContext<InvoiceGeneratorCollarCompanyContext>(options =>
+            //options.UseSqlServer(configuration.GetConnectionString("InvoiceGeneratorCollarCompanyContextConnection")));
+
             //Wstrzykiwanie Identity User
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<InvoiceGeneratorCollarCompanyContext, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI()
                 .AddDefaultTokenProviders();
