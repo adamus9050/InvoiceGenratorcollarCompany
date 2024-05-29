@@ -37,7 +37,7 @@
 
  <div class="column2" float="left">
      <h5>Aby dodać kilka rozmiarw naciśnij CTRL i zaznacz</h5>
-   <select id="Id" name="selectedSize[]" class="form-select" aria-label="Default select example" multiple required>@*przesłanie w Name Id rozmiarów do kontrolera z sygnaturą POST*@
+   <select id="Id" name="selectedSize[]" class="form-select" multiple required>@*przesłanie w Name Id rozmiarów do kontrolera z sygnaturą POST*@
           <option selected>Dodaj rozmiary</option>
     @foreach(Size size in Model.Sizes)
     {
@@ -52,12 +52,12 @@
                      
     }
    </select>
-        </div>
+ </div>
      <div id="footer"> 
                 @Html.HiddenFor(Model => Model.Id)  
               <input type="hidden" name="productId" value="@Model.Id" />
         <button type="submit" class="btn btn-outline-light" >Dodaj rozmiary</button>
- </div>
+     </div>
 }
 </div>
 </body>

@@ -62,6 +62,12 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         {
             return View();
         }
+        public IActionResult ErrorAddSize() //Walidacja przpisania rozmiaru do koszyka podczas klknięcia przycisku "dodaj do koszyka"
+        {
+            
+            TempData["sizeError"]="Proszę wybrać rozmiar produktu.";
+            return RedirectToAction("Index","Home");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

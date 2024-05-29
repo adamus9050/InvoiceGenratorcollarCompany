@@ -16,6 +16,9 @@
                 <th>Nazwa materiału</th>
                 <th>Cena materiału za m2</th>
                 <th>Cena po przeliczeniu</th>
+                <th></th>
+                <th></th>
+                <th><label for="AddItem" style="margin-left: 65px">Ilość</label></th>
             </tr>
    
            @foreach(var item in Model)
@@ -38,10 +41,25 @@
               
               <td>@item.Materials.Name</td>
               <td>@item.Materials.Price</td>
-                    <td>@(Model.Select(item => item.SizeProducts.Product.ProductPrice * item.Materials.Price * item.Quantity).Sum())</td>@* Cena po przeliczeniu *@
+                    <td>@(Model.Select(item => item.SizeProducts.Product.ProductPrice * (item.Materials.Price/15) * item.Quantity).Sum())</td>@* Cena po przeliczeniu z 1m materiału robimy 15 kołnierzy*@
                     <td><a class="btn btn-info" href="/Cart/AddItem?productId=@item.SizeProducts.ProductId&&materialId=@item.MaterialId&&sizeId=@item.SizeProducts.SizeId&&redirect=1">+</a></td>
                     <td><a class="btn btn-info" href="/Cart/RemoveItem?productId=@item.SizeProducts.ProductId&&materialId=@item.MaterialId&&sizeId=@item.SizeProducts.SizeId&&redirect=1">-</a></td>
-            </tr>
+           
+                    @* Dodawanie liczby kołenierzy do zamówienia *@
+                    <form action="@Url.Action("AddItem", "Cart")" method="post">
+                        <input type="hidden" name="productId" value="@item.SizeProducts.ProductId" />
+                        <input type="hidden" name="materialId" value="@item.MaterialId" />
+                        <input type="hidden" name="sizeId" value="@item.SizeProducts.SizeId" />
+                        <input type="hidden" name="redirect" value="1" />
+
+                    <td>
+                        <input type="number" name="Quantity" value="0" />
+                    </td>
+                    <td>
+                        <button class="btn btn-info" type="submit">Dodaj ilość</button>
+                    </td>
+                    </form>
+                </tr>
            }
         </table>
         <div class="my-2">
@@ -49,7 +67,7 @@
         </div>
 
         <div class="my-2">
-            <a class="btn btn-primary" href="#">Checkout</a>    
+            <a class="btn btn-primary" href="/Cart/Checkout">Checkout</a>    
         </div>
     }
     else

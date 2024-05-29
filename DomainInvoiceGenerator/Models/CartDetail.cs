@@ -15,6 +15,7 @@ namespace Domain.Models
         [Required]
         public int MaterialId { get; set; }
         public int Quantity { get; set; }
+        [Required]
         public double UnitPrice { get; set; }
         public SizeProduct SizeProducts{ get; set; }
         public Material Materials{ get; set; }
