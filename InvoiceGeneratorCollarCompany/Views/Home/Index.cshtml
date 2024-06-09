@@ -78,11 +78,11 @@
                               <a class="accordion-button" href="@Url.Action("AddSizeToProduct", "Crud",new{productId = product.Id})">Dodaj rozmiary</a>
                             }
                             @if(product.Sizes.Count() == 0 || User.IsInRole("User"))
-           {
-               <h6>Brak rozmiarów</h6>
-           }
-                            else
                             {
+                                <h6>Brak rozmiarów</h6>
+                            }
+                            else
+                            {       @*Wyświetlanie rozmiarów*@
                               <div class="col-sm-12">
                               <select class="form-select" id="sizeId_@product.Id" name="sizeId">
                               

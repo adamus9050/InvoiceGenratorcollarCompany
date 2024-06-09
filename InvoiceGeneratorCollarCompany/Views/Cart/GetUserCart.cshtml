@@ -67,7 +67,10 @@
         </div>
 
         <div class="my-2">
-            <a class="btn btn-primary" href="/Cart/Checkout">Checkout</a>    
+
+            <form action="@Url.Action("Checkout", "Cart")">
+                <button class="btn btn-info" type="submit">Przejdz dalej</button>
+            </form>    
         </div>
     }
     else

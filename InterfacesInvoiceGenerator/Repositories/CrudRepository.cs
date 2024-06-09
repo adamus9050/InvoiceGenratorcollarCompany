@@ -54,18 +54,19 @@ namespace Infrastructures.Repositories
             sizeAdded.NameInt = size.NameInt;
             return sizeAdded;
         }
-        public async Task<Product> GetProduct(int prodId)
+        public async Task<Product> GetProduct(int prodId = 0)
         {
-            var selctedProduct = await _db.Products.FindAsync(prodId);
-            Product product = new Product();
-            product.ProductId = prodId;
-            product.ProductName=selctedProduct.ProductName;
-            product.ProductPrice = selctedProduct.ProductPrice;
-            product.Description = selctedProduct.Description;
-            product.Image = selctedProduct.Image; 
-            product.CreatedAt = selctedProduct.CreatedAt;
+                var selctedProduct = await _db.Products.FindAsync(prodId);
+                Product product = new Product();
+                product.ProductId = prodId;
+                product.ProductName=selctedProduct.ProductName;
+                product.ProductPrice = selctedProduct.ProductPrice;
+                product.Description = selctedProduct.Description;
+                product.Image = selctedProduct.Image; 
+                product.CreatedAt = selctedProduct.CreatedAt;
+                
+                return product;
 
-            return product;
 
         }
         public async Task<Size> GetSize(int sizeId)
@@ -164,7 +165,7 @@ namespace Infrastructures.Repositories
             }
 
             _db.SaveChanges();
-        }
+        }//do zrobienia
         public async Task AddSizeProduct(int productId, int sizeId)
         {
             SizeProduct sizeproduct = new SizeProduct();

@@ -15,7 +15,7 @@ namespace Domain.Models
         [Required]
         public int OrderStatusId { get; set; }
         public bool IsDeleted { get; set; } = false;
-        public OrderStatus OrderStatus { get; set; }
+        public OrderStatus OrderStatuses { get; set; }
         public List<OrderDetail>OrderDetail { get; set; }
 
     }

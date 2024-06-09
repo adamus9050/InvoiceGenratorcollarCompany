@@ -23,6 +23,7 @@ namespace Infrastructures.Repositories
             _db = db;
             _userManager = userManager;
             _ContextAccesor = contextAccessor;
+
         }
         public async Task<int> AddItemToCart(SizeProduct sizeproductId, int materialId, int quantity)
         {
@@ -47,6 +48,9 @@ namespace Infrastructures.Repositories
 
             SizeProduct sizeProduct = new SizeProduct();
             sizeProduct.Id = sizeproductId.Id;
+            var productPrice = await (from pr in _db.sizeProducts where sizeproductId.Id == pr.Id
+                                 select new Product {ProductPrice = pr.Product.ProductPrice,ProductName=pr.Product.ProductName }).FirstAsync();
+                
 
             var cartItem = _db.CartDetails.FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.SizeProductId == sizeproductId.Id && a.MaterialId == materialId);
             if (cartItem is not null)
@@ -56,12 +60,11 @@ namespace Infrastructures.Repositories
             else
             {
                 var material = _db.Materials.Find(materialId);
-
-
                 cartItem = new CartDetail
                 {
                     SizeProductId = sizeproductId.Id,
                     MaterialId = materialId,
+                    UnitPrice = (productPrice.ProductPrice + material.Price)*quantity,
                     ShoppingCartId = cart.Id,
                     Quantity = quantity
                 };
@@ -69,12 +72,6 @@ namespace Infrastructures.Repositories
             }
             await _db.SaveChangesAsync();
 
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    transaction.Rollback();
-            //}
             var cartItemCount = await GetItemCountCart(userId);
             return cartItemCount;
         }
@@ -149,18 +146,6 @@ namespace Infrastructures.Repositories
             .Where(cd => cd.ShoppingCartId == selectedShoppingCartId)
             .ToListAsync();
 
-            //var shoppingCart = await (from shoppingcart in _db.ShoppingCarts
-            //                          join cartDetail in _db.CartDetails on shoppingcart.Id equals cartDetail.ShoppingCartId
-            //                          where (shoppingcart.UserId == userId )
-            //                          select new ShoppingCart()).FirstAsync();
-
-            //var shoppingCart = await _db.ShoppingCarts
-            //                        .Include(a => a.CartDetails)
-            //                        .ThenInclude(a => a.SizeProducts)
-            //                        .Include(a => a.CartDetails)
-            //                        .ThenInclude(a => a.Materials)
-            //                        .Where(a => a.UserId == userId).FirstOrDefaultAsync();
-
 
             return cartDetails;
 
@@ -192,28 +177,30 @@ namespace Infrastructures.Repositories
             using var transaction = _db.Database.BeginTransaction();
             try
             {
-                // logic
+                
                 // move data from cartDetail to order and order detail then we will remove cart detail
                 var userId = GetUsersId();
                 if (string.IsNullOrEmpty(userId))
-                    throw new Exception("User is not logged-in");
+                    throw new Exception("Użytkownik nie jest zalogowany");
 
                 var cart = await GetCart(userId);
                 if (cart is null)
-                    throw new Exception("Invalid cart");
+                    throw new Exception("Nieprawidłowy koszyk");
+
                 var cartDetail = _db.CartDetails
-                                    .Where(a => a.Id == cart.Id).ToList();
+                                    .Where(a => a.ShoppingCartId == cart.Id).ToList();
 
                 if (cartDetail.Count == 0)
-                    throw new Exception("Cart is empty");
+                    throw new Exception("Koszyk jest pusty");
                 var pendingRecord = _db.OrderStatuses.FirstOrDefault(s => s.StatusName == "Pending");
                 if (pendingRecord is null)
                     throw new InvalidOperationException("Order status does not have Pending status");
+
                 var order = new Order
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    OrderStatusId = 1//pending
+                    OrderStatusId = pendingRecord.Id,
                 };
 
                 _db.Orders.Add(order);
@@ -223,17 +210,17 @@ namespace Infrastructures.Repositories
                 {
                     var orderDetail = new OrderDetail
                     {
-
                         CartDetailId = item.Id,
+                        Order = order,
+                        CartDetails = item,
                         OrderId = order.Id,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice
                     };
-                    _db.OrderDetails.Add(orderDetail);
-                
-                
+                    await _db.OrderDetails.AddAsync(orderDetail);
+                                    
                 }
-            
+                   await _db.SaveChangesAsync();
                     //_db.SaveChanges();
 
                    // removing the cartdetails
@@ -255,5 +242,6 @@ namespace Infrastructures.Repositories
             string userId = _userManager.GetUserId(principal);
             return userId;
         }
+
     }
 }

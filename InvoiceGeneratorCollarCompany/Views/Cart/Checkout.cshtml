@@ -1,0 +1,53 @@
+﻿@model Application.DTOs.CheckoutViewModel;
+@{
+   ViewData["Title"] = "Checkout";
+}
+
+<h2>Finalizacja zamówienia</h2>
+
+@if (Model.HasError)
+{
+    <div class="alert alert-danger">
+        <strong>Błąd:</strong> @Model.ErrorMessage
+    </div>
+}
+else
+{
+    <div class="alert alert-success">
+        <strong>Sukces!</strong> Twoje zamówienie zostało złożone pomyślnie.
+    </div>
+
+    <h3>Informacje o użytkowniku</h3>
+    <p><strong>Nazwa firmy:</strong> @Model.User.CompanyName</p>
+    <p><strong>Imię:</strong> @Model.User.Name</p>
+    <p><strong>Nazwisko:</strong> @Model.User.Surname</p>
+    <p><strong>Email:</strong> @Model.User.Email</p>
+    <p><strong>Ulica:</strong> @Model.User.Street</p>
+    <p><strong>Numer domu:</strong> @Model.User.NumberOf</p>
+    <p><strong>Kod pocztowy:</strong> @Model.User.PostCode</p>
+
+    <h3>Podsumowanie zamówienia</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nazwa produktu</th>
+                <th>Ilość</th>
+                <th>Cena jednostkowa</th>
+                <th>Łączna cena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderDetailsModel)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice.ToString("C")</td>
+                    <td>@(item.Quantity * item.UnitPrice).ToString("C")</td>
+                </tr>
+            }
+        </tbody> 
+    </table>
+
+     <h4>Całkowita kwota: @Model.TotalAmount.ToString("C")</h4> 
+}
