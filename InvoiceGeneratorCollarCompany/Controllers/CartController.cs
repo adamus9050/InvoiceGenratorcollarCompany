@@ -73,7 +73,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             bool isCheckedOut = await _cartRepository.DoCheckout();
 
             var checkoutUserModel = new UserViewModel();
-            if (!isCheckedOut)
+            if (isCheckedOut)
             {
                 throw new Exception("Coś poszło nie trak po stronie serwera");
                 

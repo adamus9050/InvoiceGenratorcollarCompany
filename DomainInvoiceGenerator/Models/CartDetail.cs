@@ -6,7 +6,7 @@ namespace Domain.Models
     [Table("CartDetail")]
     public class CartDetail
     {
-        
+
         public int Id { get; set; }
         [Required]
         public int ShoppingCartId { get; set; }

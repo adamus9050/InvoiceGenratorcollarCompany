@@ -42,12 +42,14 @@ else
                 <tr>
                     <td>@item.ProductName</td>
                     <td>@item.Quantity</td>
-                    <td>@item.UnitPrice.ToString("C")</td>
-                    <td>@(item.Quantity * item.UnitPrice).ToString("C")</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@(item.Quantity * item.UnitPrice)</td>
                 </tr>
             }
         </tbody> 
     </table>
-
-     <h4>Całkowita kwota: @Model.TotalAmount.ToString("C")</h4> 
+   
+     <h4>Całkowita kwota: @Model.TotalAmount</h4>
+     
+     <button class="btn-light">Przejdz dalej</button>
 }

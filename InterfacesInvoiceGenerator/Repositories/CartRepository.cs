@@ -64,7 +64,7 @@ namespace Infrastructures.Repositories
                 {
                     SizeProductId = sizeproductId.Id,
                     MaterialId = materialId,
-                    UnitPrice = (productPrice.ProductPrice + material.Price)*quantity,
+                    UnitPrice = (productPrice.ProductPrice + (material.Price/10))*quantity,
                     ShoppingCartId = cart.Id,
                     Quantity = quantity
                 };

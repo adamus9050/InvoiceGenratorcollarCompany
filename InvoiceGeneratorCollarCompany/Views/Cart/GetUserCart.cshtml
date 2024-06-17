@@ -41,7 +41,7 @@
               
               <td>@item.Materials.Name</td>
               <td>@item.Materials.Price</td>
-                    <td>@(Model.Select(item => item.SizeProducts.Product.ProductPrice * (item.Materials.Price/15) * item.Quantity).Sum())</td>@* Cena po przeliczeniu z 1m materiału robimy 15 kołnierzy*@
+                    <td><option value="@item.UnitPrice">@item.UnitPrice</option></td> @* Cena po przeliczeniu z 1m materiału robimy 15 kołnierzy*@
                     <td><a class="btn btn-info" href="/Cart/AddItem?productId=@item.SizeProducts.ProductId&&materialId=@item.MaterialId&&sizeId=@item.SizeProducts.SizeId&&redirect=1">+</a></td>
                     <td><a class="btn btn-info" href="/Cart/RemoveItem?productId=@item.SizeProducts.ProductId&&materialId=@item.MaterialId&&sizeId=@item.SizeProducts.SizeId&&redirect=1">-</a></td>
            
@@ -63,7 +63,6 @@
            }
         </table>
         <div class="my-2">
-            <h5>Total Price:</h5> @(Model.Select(item => item.SizeProducts.Product.ProductPrice * item.Quantity).Sum());
         </div>
 
         <div class="my-2">
