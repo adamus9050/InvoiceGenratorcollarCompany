@@ -210,9 +210,11 @@ namespace Infrastructures.Repositories
                 {
                     var orderDetail = new OrderDetail
                     {
-                        CartDetailId = item.Id,
+                        SizeProductId = item.SizeProductId,
+                        MaterialId = item.MaterialId,
+                        SizeProducts = item.SizeProducts,
+                        Materials = item.Materials,
                         Order = order,
-                        CartDetails = item,
                         OrderId = order.Id,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice
@@ -234,6 +236,35 @@ namespace Infrastructures.Repositories
 
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<OrderDetail>> GetUserOrderDetail()
+        {
+            //var userId = GetUsersId();
+
+            //if (userId == null)
+            //{
+            //    throw new Exception("Invalid userId");
+
+            //}
+
+            var selectedOrderDetails = await (from order in _db.Orders join detail in _db.OrderDetails on order.Id equals detail.OrderId
+                                              where order.Id == detail.OrderId
+                                              select new OrderDetail
+                                              {
+                                                  Quantity = detail.Quantity,
+                                                  UnitPrice = detail.UnitPrice,
+                                                  MaterialId=detail.MaterialId,
+                                                  Order = order,
+                                                  OrderId = order.Id,
+                                                  Materials=detail.Materials,
+                                                  SizeProductId = detail.SizeProductId,
+                                                  SizeProducts=detail.SizeProducts,
+                                              }).ToListAsync();
+
+            return selectedOrderDetails;
+
+
         }
 
         private string GetUsersId()

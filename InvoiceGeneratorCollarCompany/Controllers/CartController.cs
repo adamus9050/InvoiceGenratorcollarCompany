@@ -92,20 +92,24 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                     PostCode = user.PostCode
                     
                 };
-                //var OrederdetailsModel = await _cartRepository.GetCart(user.Id);
-                IEnumerable<CartDetail> OrederdetailsModel = await _cartRepository.GetUserCart();
+
+                IEnumerable<OrderDetail> OrederdetailsModel = await _cartRepository.GetUserOrderDetail();
 
                 List<OrderDetailViewModel> orders = new List<OrderDetailViewModel>();
                 foreach (var item in OrederdetailsModel)
                 {
                     var detailsModel = new OrderDetailViewModel
-                    {
-                        OrderDetails = item.OrderDetails,
-                        ProductName = item.SizeProducts.Product.ProductName,
+                    {                       
+                        SizeProductId = item.SizeProductId,
+                        SizeProducts = item.SizeProducts,
+                        MaterialId = item.MaterialId,
+                        Materials = item.Materials,
+                        Products=item.SizeProducts.Product,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice
                     };
                     orders.Add(detailsModel);
+
                 };
 
                 CheckoutViewModel checkoutViewModel = new CheckoutViewModel

@@ -20,8 +20,5 @@ namespace Domain.Models
         public SizeProduct SizeProducts{ get; set; }
         public Material Materials{ get; set; }
         public ShoppingCart ShoppingCart { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
-
-
     }
 }
