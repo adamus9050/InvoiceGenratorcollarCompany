@@ -69,6 +69,20 @@ namespace Infrastructures.Repositories
 
 
         }
+        public async Task<Product> GetProductSizeProductId(int productSizeId)
+        {
+            var product = await (from products in _db.Products
+                                 join sizeproducts in _db.sizeProducts on products.ProductId equals sizeproducts.ProductId
+                                 select new Product
+                                 {
+                                     ProductId = products.ProductId,
+                                     ProductName = products.ProductName,
+                                     ProductPrice = products.ProductPrice,
+                                     Description = products.Description,
+                                     TypeName= products.TypeName,
+                                 }).FirstOrDefaultAsync();
+            return product;
+        }
         public async Task<Size> GetSize(int sizeId)
         {
             var sizeSelected = await _db.Sizes.FindAsync(sizeId);

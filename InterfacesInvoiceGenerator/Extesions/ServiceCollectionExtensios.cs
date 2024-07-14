@@ -38,6 +38,7 @@ namespace Infrastructures.Extesions
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddTransient<ICrudRepository, CrudRepository>();
             services.AddScoped<IUserOrderRepository, UserOrderRepository>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             
             services.AddMvc();

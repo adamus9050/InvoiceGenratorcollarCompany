@@ -9,6 +9,8 @@ namespace Domain.Interfaces
         public Task<Size> AddSizes(Size size);
         public Task AddSizeProduct(int NameProduct, int nameSize);
         public Task<Product> GetProduct(int prodId);
+        public Task<Product> GetProductSizeProductId(int productSizeId);
+
         public Task<Size> GetSize(int sizeId);
         public Task<IEnumerable<Size>> GetSizeList();
         public Task<IEnumerable<Material>> GetMaterialList();

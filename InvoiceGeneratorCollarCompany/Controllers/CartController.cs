@@ -1,6 +1,5 @@
 ﻿using Application.DTOs;
 using Domain.Interfaces;
-using Domain.Interfces;
 using Domain.Models;
 using Infrastructures.Context;
 using Infrastructures.Context.Data;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace InvoiceGeneratorCollarCompany.Controllers
 {
@@ -17,14 +17,16 @@ namespace InvoiceGeneratorCollarCompany.Controllers
     {
         private readonly ICartRepository _cartRepository;
         private readonly ICrudRepository _crudRepository;
-        private readonly UserManager<InvoiceGeneratorCollarCompanyContext> _userManager; 
+        private readonly IEmailSender _emailSender;
+        private readonly UserManager<InvoiceGeneratorCollarCompanyContext> _userManager;
         private readonly ApplicationDbContext _db;
 
 
-        public CartController(ICartRepository cartRepository, ICrudRepository crudRepository, ApplicationDbContext db, UserManager<InvoiceGeneratorCollarCompanyContext> userManager)
+        public CartController(ICartRepository cartRepository, ICrudRepository crudRepository, IEmailSender emailSender, ApplicationDbContext db, UserManager<InvoiceGeneratorCollarCompanyContext> userManager)
         {
             _cartRepository = cartRepository;
             _crudRepository = crudRepository;
+            _emailSender = emailSender;
             _db = db;
             _userManager = userManager;
         }
@@ -70,13 +72,15 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout(CheckoutViewModel model)
         {
+            IEnumerable<CartDetail> cartDetails = await _cartRepository.GetUserCart();
+
             bool isCheckedOut = await _cartRepository.DoCheckout();
 
             var checkoutUserModel = new UserViewModel();
-            if (isCheckedOut)
+            if (!isCheckedOut)
             {
                 throw new Exception("Coś poszło nie trak po stronie serwera");
-                
+
             }
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
@@ -85,27 +89,32 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                 {
                     Name = user.Name,
                     Surname = user.Surname,
-                    Email=user.Email,
+                    Email = user.Email,
                     CompanyName = user.CompanyName,
                     Street = user.Street,
                     NumberOf = user.NumberOf,
                     PostCode = user.PostCode
-                    
+
                 };
-                //var OrederdetailsModel = await _cartRepository.GetCart(user.Id);
-                IEnumerable<CartDetail> OrederdetailsModel = await _cartRepository.GetUserCart();
+
+                IEnumerable<OrderDetail> OrederdetailsModel = await _cartRepository.GetUserOrderDetail();
 
                 List<OrderDetailViewModel> orders = new List<OrderDetailViewModel>();
                 foreach (var item in OrederdetailsModel)
                 {
                     var detailsModel = new OrderDetailViewModel
                     {
-                        OrderDetails = item.OrderDetails,
-                        ProductName = item.SizeProducts.Product.ProductName,
+                        SizeProductId = item.SizeProductId,
+                        SizeProducts = item.SizeProducts,
+                        Sizes = await _crudRepository.GetSize(item.SizeProducts.SizeId),
+                        Products = await _crudRepository.GetProductSizeProductId(item.SizeProductId),
+                        MaterialId = item.MaterialId,
+                        Materials = item.Materials,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice
                     };
                     orders.Add(detailsModel);
+
                 };
 
                 CheckoutViewModel checkoutViewModel = new CheckoutViewModel
@@ -115,14 +124,26 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                     ErrorMessage = "Koszyk został dodany"
 
                 };
-                return View("Checkout",checkoutViewModel );
+
+                string nazwaFaktury = $"Faktura{checkoutUserModel.Name}.xls";
+                string plik = $@"D:\Programowanie\C#\Asp.Net\InvoiceGenratorcollarCompany\Faktury\{nazwaFaktury}";
+                await _emailSender.ExcellDocGenerator($@"D:\Programowanie\C#\Asp.Net\InvoiceGenratorcollarCompany\Faktury\{nazwaFaktury}", cartDetails);
+                await _emailSender.CreateTestMessage4(checkoutUserModel.Email, plik, "smtp.gmail.com");
+                
+                return View("Checkout", checkoutViewModel);
             }
             else
             {
                 TempData["Błąd"] = "Coś poszło nie tak spróbuj jeszcze raz bądz skonatktuj się z adminem.";
                 return View("Checkout");
             }
-            
+
         }
-    } 
+        public async Task<IActionResult> InvoiceGenerate()
+        {
+
+            return View();
+        }
+
+    }
 }

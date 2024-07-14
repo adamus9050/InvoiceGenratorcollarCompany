@@ -10,14 +10,15 @@ namespace Domain.Models
         [Required]
         public int OrderId { get; set; }
         [Required]
-        public int CartDetailId { get; set; }
+        public int SizeProductId { get; set; }
+        [Required]
+        public int MaterialId { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
         public double UnitPrice { get; set; }
         public Order Order { get; set; }
-        public CartDetail CartDetails { get; set; }
-
-
+        public SizeProduct SizeProducts { get; set; }
+        public Material Materials { get; set; }
     }
 }

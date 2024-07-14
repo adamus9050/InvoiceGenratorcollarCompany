@@ -10,6 +10,7 @@ using Application.DTOs;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using Infrastructures.Context.Data;
+using Domain.Interfaces;
 
 namespace Infrastructures.Repositories
 {
@@ -192,7 +193,7 @@ namespace Infrastructures.Repositories
 
                 if (cartDetail.Count == 0)
                     throw new Exception("Koszyk jest pusty");
-                var pendingRecord = _db.OrderStatuses.FirstOrDefault(s => s.StatusName == "Pending");
+                var pendingRecord = _db.OrderStatuses.FirstOrDefault(s => s.StatusName == "Przygotowywany");
                 if (pendingRecord is null)
                     throw new InvalidOperationException("Order status does not have Pending status");
 
@@ -200,7 +201,7 @@ namespace Infrastructures.Repositories
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    OrderStatusId = pendingRecord.Id,
+                    OrderStatusId = pendingRecord.Id
                 };
 
                 _db.Orders.Add(order);
@@ -210,15 +211,17 @@ namespace Infrastructures.Repositories
                 {
                     var orderDetail = new OrderDetail
                     {
-                        CartDetailId = item.Id,
+                        SizeProductId = item.SizeProductId,
+                        MaterialId = item.MaterialId,
+                        SizeProducts = item.SizeProducts,
+                        Materials = item.Materials,
                         Order = order,
-                        CartDetails = item,
                         OrderId = order.Id,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice
                     };
-                    await _db.OrderDetails.AddAsync(orderDetail);
-                                    
+                    await _db.OrderDetails.AddAsync(orderDetail);                    
+
                 }
                    await _db.SaveChangesAsync();
                     //_db.SaveChanges();
@@ -234,6 +237,32 @@ namespace Infrastructures.Repositories
 
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<OrderDetail>> GetUserOrderDetail()
+        {
+
+
+            var selectedOrderDetails = await (from order in _db.Orders
+                                              join detail in _db.OrderDetails on order.Id equals detail.OrderId
+                                              join sizeproduct in _db.sizeProducts on detail.SizeProductId equals sizeproduct.Id
+                                              where order.Id == detail.OrderId
+                                              select new OrderDetail
+                                              {
+                                                  Quantity = detail.Quantity,
+                                                  UnitPrice = detail.UnitPrice,
+                                                  MaterialId = detail.MaterialId,
+                                                  Order = order,
+                                                  OrderId = order.Id,
+                                                  Materials = detail.Materials,
+                                                  SizeProductId = sizeproduct.Id,
+                                                  SizeProducts = sizeproduct,
+                                              }).ToListAsync();
+
+
+            return selectedOrderDetails;
+
+
         }
 
         private string GetUsersId()

@@ -19,10 +19,16 @@ namespace Application.DTOs
 
     public class OrderDetailViewModel
     {
-        public string ProductName { get; set; }
+        public Product Products { get; set; }
         public int Quantity { get; set; }
+        public int SizeId { get; set; }
         public double UnitPrice { get; set; }
+        public int SizeProductId { get; set; }
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public SizeProduct SizeProducts  { get; set; }
+        public int MaterialId { get; set; }
+        public Size Sizes { get; set; }
+        public Material Materials { get; set; }
     }
 
     public class UserViewModel

@@ -30,26 +30,31 @@ else
     <table class="table">
         <thead>
             <tr>
+                <th>Nazwa materiału</th>
                 <th>Nazwa produktu</th>
+                <th>Rozmiar</th>
                 <th>Ilość</th>
                 <th>Cena jednostkowa</th>
                 <th>Łączna cena</th>
             </tr>
         </thead>
-        <tbody>
+        <tr>
             @foreach (var item in Model.OrderDetailsModel)
-            {
-                <tr>
-                    <td>@item.ProductName</td>
+            {              
+                    <td>@item.Materials.Name</td> 
+                    <td>@item.Products.ProductName</td> 
+                     <td>@item.SizeProducts.Size.Namestring</td>
                     <td>@item.Quantity</td>
                     <td>@item.UnitPrice</td>
-                    <td>@(item.Quantity * item.UnitPrice)</td>
-                </tr>
+                    <td>@(item.Quantity * item.UnitPrice)</td>              
+                    <td><h5>cena jednostkowa</h5></td>
+                    <td>@(item.Quantity * item.UnitPrice).ToString("C")</td>              
+<br/>
             }
-        </tbody> 
+        </tr>
     </table>
    
      <h4>Całkowita kwota: @Model.TotalAmount</h4>
      
-     <button class="btn-light">Przejdz dalej</button>
+     <button class="btn-light">Generuj fakturę</button>
 }
