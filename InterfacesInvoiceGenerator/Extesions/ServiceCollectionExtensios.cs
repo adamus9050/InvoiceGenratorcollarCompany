@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +19,18 @@ namespace Infrastructures.Extesions
 {
     public static class ServiceCollectionExtensios
     {
-     
+
         public static void AddInfrastructures(this IServiceCollection services, IConfiguration configuration)
         {
             //Wstrzykiwanie AppliccationDbContext
-           services.AddDbContext<ApplicationDbContext>(options =>
-           options.UseSqlServer(configuration.GetConnectionString("InvoiceGenerator")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("InvoiceGenerator"))
+                 .UseLoggerFactory(ApplicationDbContext._loggerFactory)  // Dodanie logowania
+                 .EnableSensitiveDataLogging());  // Logowanie danych wrażliwych;
 
-            //services.AddDbContext<InvoiceGeneratorCollarCompanyContext>(options =>
-            //options.UseSqlServer(configuration.GetConnectionString("InvoiceGeneratorCollarCompanyContextConnection")));
+
+
+
 
             //Wstrzykiwanie Identity User
             services.AddIdentity<InvoiceGeneratorCollarCompanyContext, IdentityRole>()

@@ -10,14 +10,6 @@ using Infrastructures.Context;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
-//var connectionString = builder.Configuration.GetConnectionString("InvoiceGeneratorCollarCompanyContextConnection"); //?? throw new InvalidOperationException("Connection string 'InvoiceGeneratorCollarCompanyContextConnection' not found.");
-
-//builder.Services.AddDbContext<InvoiceGeneratorCollarCompanyContext>(options => options.UseSqlServer(connectionString));
-
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<InvoiceGeneratorCollarCompanyContext>();
-
-
 builder.Services.AddControllersWithViews();
 
 
@@ -26,6 +18,7 @@ builder.Services.AddInfrastructures(builder.Configuration);
 
 
 var app = builder.Build();
+
 
 //Dostarczenie DbSeeder 
 using (var scope = app.Services.CreateScope())

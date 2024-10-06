@@ -26,6 +26,8 @@ namespace Infrastructures.Repositories
             _ContextAccesor = contextAccessor;
 
         }
+
+// Dodawanie produktów(itemów) do koszyka
         public async Task<int> AddItemToCart(SizeProduct sizeproductId, int materialId, int quantity)
         {
             string userId = GetUsersId();
@@ -47,12 +49,13 @@ namespace Infrastructures.Repositories
             }
             await _db.SaveChangesAsync();
 
+            //Wybranie konkretnych danych produktu do koszyka 
             SizeProduct sizeProduct = new SizeProduct();
             sizeProduct.Id = sizeproductId.Id;
             var productPrice = await (from pr in _db.sizeProducts where sizeproductId.Id == pr.Id
                                  select new Product {ProductPrice = pr.Product.ProductPrice,ProductName=pr.Product.ProductName }).FirstAsync();
                 
-
+            // stworzenie koszyka z odpowiednimi danymi
             var cartItem = _db.CartDetails.FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.SizeProductId == sizeproductId.Id && a.MaterialId == materialId);
             if (cartItem is not null)
             {
@@ -118,8 +121,10 @@ namespace Infrastructures.Repositories
             return cartItemCount;
         }
 
+//Pobieranie koszyka klienta 
         public async Task<IEnumerable<CartDetail>> GetUserCart()
         {
+        //sprawdzenie Id klienta
             var userId = GetUsersId();
 
             if (userId == null)
@@ -128,6 +133,7 @@ namespace Infrastructures.Repositories
 
             }
 
+        //znalezienie koszyka odpowiadającego dla danego klienta
             var selectedshoppingCart = await (from shoppingCart in _db.ShoppingCarts
                                               where shoppingCart.UserId == userId
                                               select new ShoppingCart
@@ -139,7 +145,8 @@ namespace Infrastructures.Repositories
                                               }).FirstAsync();
 
             int selectedShoppingCartId = selectedshoppingCart.Id;
-
+            
+        //Wyświetlenie koszyka, odpowiedniego dla konkretnego klienta
             var cartDetails = await _db.CartDetails
             .Include(cd => cd.Materials)
             .Include(cd => cd.SizeProducts.Product)
@@ -150,13 +157,13 @@ namespace Infrastructures.Repositories
 
             return cartDetails;
 
-
         }
         public async Task<ShoppingCart> GetCart(string userId)
         {
             var userCart = await _db.ShoppingCarts.FirstOrDefaultAsync(u => u.UserId == userId);
             return userCart;
         }
+
         //Zwraca liczbę itemów z koszyka
         public async Task<int> GetItemCountCart(string userId = "")
         {
@@ -179,7 +186,7 @@ namespace Infrastructures.Repositories
             try
             {
                 
-                // move data from cartDetail to order and order detail then we will remove cart detail
+                // przesunięcie z CartDetail do OrderDetiail a następnie usunięcie koszyka z CartDetail
                 var userId = GetUsersId();
                 if (string.IsNullOrEmpty(userId))
                     throw new Exception("Użytkownik nie jest zalogowany");
@@ -193,6 +200,7 @@ namespace Infrastructures.Repositories
 
                 if (cartDetail.Count == 0)
                     throw new Exception("Koszyk jest pusty");
+
                 var pendingRecord = _db.OrderStatuses.FirstOrDefault(s => s.StatusName == "Przygotowywany");
                 if (pendingRecord is null)
                     throw new InvalidOperationException("Order status does not have Pending status");
@@ -223,10 +231,9 @@ namespace Infrastructures.Repositories
                     await _db.OrderDetails.AddAsync(orderDetail);                    
 
                 }
-                   await _db.SaveChangesAsync();
-                    //_db.SaveChanges();
+                   await _db.SaveChangesAsync();                 
 
-                   // removing the cartdetails
+                   // Usunięcie CartDetails
                   _db.CartDetails.RemoveRange(cartDetail);
                   _db.SaveChanges();
                   transaction.Commit();

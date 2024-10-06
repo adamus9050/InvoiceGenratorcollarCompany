@@ -2,6 +2,9 @@
 using Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Infrastructures.Context.Data;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 
 namespace Infrastructures.Context
 {
@@ -21,6 +24,9 @@ namespace Infrastructures.Context
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public static readonly ILoggerFactory _loggerFactory = new NLogLoggerFactory();
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Material> Materials { get; set; }
@@ -32,6 +38,12 @@ namespace Infrastructures.Context
         public DbSet<SizeProduct> sizeProducts { get; set; }
         public DbSet<Domain.Models.Type> Types { get; set; }
 
-
+        //logi dla operacji SQL na bazie danych
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(_loggerFactory)
+                .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information)
+                .EnableSensitiveDataLogging();
+        }
     }
 }

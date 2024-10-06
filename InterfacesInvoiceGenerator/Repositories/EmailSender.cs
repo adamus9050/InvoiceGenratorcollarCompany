@@ -16,6 +16,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using Domain.Models;
 using System.Net.Mime;
 using Humanizer;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Infrastructures.Repositories
 {
@@ -27,51 +28,17 @@ namespace Infrastructures.Repositories
         {
             _db = db;
             _userManager = userManager;
-
         }
 
-        //public async Task SendEmailAsync(string email, string subject, string message)
-        //{
-        //    var yourmail = "adamus9050@gmail.com";
-        //    var passwd = "Kazik253033";
-        //    MailMessage mail = new MailMessage(
-        //        To adresat = new To(yourmail)
-
-        //        );
-        //    //var client = new SmtpClient("smtp.office365.com", 587)
-        //    //{
-        //    //    EnableSsl = true,
-        //    //    UseDefaultCredentials = false,
-        //    //    Credentials = new NetworkCredential(yourmail, passwd)
-        //    //};
-        //    Attachment data = new Attachment(subject, MediaTypeNames.Application.Octet);
-        //    ContentDisposition disposition = data.ContentDisposition;
-        //    disposition.CreationDate = System.IO.File.GetCreationTime(subject);
-        //    disposition.ModificationDate = System.IO.File.GetLastWriteTime(subject);
-        //    disposition.ReadDate = System.IO.File.GetLastAccessTime(subject);
-        //    // Add the file attachment to this email message.
-        //    mail.Attachments.Add(data);
-
-        //    //return client.SendMailAsync(
-        //    //    new MailMessage(from: yourmail,
-        //    //                    to: email,
-        //    //                    subject,
-        //    //                    message
-        //    //                    ));
-
-
-
-
-        //}
-
-        public async Task CreateTestMessage4(string emailTo,string attach ,string server = "smtp.gmail.com")//, string subject, string message
+        public async Task CreateTestMessage4(string emailTo, string attach, string server = "smtp.gmail.com")//, string subject, string message
         {
-            MailAddress from = new MailAddress("adamus9050@gmail.com");
-            MailAddress to = new MailAddress(emailTo);
-            MailMessage message = new MailMessage(from, to);
-            message.Subject = "Using the SmtpClient client";
-            message.Body = "snjcsbsdbcjhdsbcljjd";
-            
+            //Wysyłanie maila
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("adamus9050@gmail.com");
+            mailMessage.To.Add(emailTo);
+            mailMessage.Subject = "Test Mail Subject";
+            mailMessage.Body = "Test message from my mail";
+
             //tworzenie załącznika
             Attachment data = new Attachment(attach, MediaTypeNames.Application.Octet);
             // Add time stamp information for the file.
@@ -79,22 +46,25 @@ namespace Infrastructures.Repositories
             disposition.CreationDate = System.IO.File.GetCreationTime(attach);
             disposition.ModificationDate = System.IO.File.GetLastWriteTime(attach);
             disposition.ReadDate = System.IO.File.GetLastAccessTime(attach);
-            // Add the file attachment to this email message.
-            message.Attachments.Add(data);
+            //Dodawanie załącznika do maila
+            mailMessage.Attachments.Add(data);
 
             SmtpClient client = new SmtpClient();
-            client.Credentials = new NetworkCredential("adamus9050@gmail.com", "Kazik253033");
             client.Host = "smtp.gmail.com";
             client.Port = 587;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("adamus9050", "anlwymqqkbfxqalw");
             client.EnableSsl = true;
+
             try
             {
-                await client.SendMailAsync(message);
+                await client.SendMailAsync(mailMessage);
+                Console.WriteLine("Email was succesfully sent");
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Exception caught in CreateTestMessage4(): {0}",
-                    ex.ToString());
+                ex.ToString());
             }
         }
         public async Task ExcellDocGenerator(string filename, IEnumerable<CartDetail> orderDetails)

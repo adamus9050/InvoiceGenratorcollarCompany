@@ -22,25 +22,35 @@ namespace Infrastructures.Repositories
         public async Task<IEnumerable<Product>> GetProducts(string sTerm="", int typeId=0,int size=0) 
         {
 
-
-            IEnumerable<Product> products = await (from product in _db.Products 
-                            join type in _db.Types on product.TypeId equals type.Id
-                            where string.IsNullOrWhiteSpace(sTerm) || (product!=null && product.ProductName.StartsWith(sTerm)) //Wyszukiwarka produktów
-                            select new Product
-                            {
-                                ProductId = product.ProductId,
-                                Image = product.Image,
-                                ProductName = product.ProductName,
-                                Description = product.Description,
-                                ProductPrice = product.ProductPrice,
-                                Type = product.Type,
-                                TypeName= product.TypeName,
-                            }).ToListAsync();
-            if(typeId> 0)
+            try
             {
-                products = products.Where(a =>a.TypeId == typeId).ToList();
+                IEnumerable<Product> products = await (from product in _db.Products
+                                                       join type in _db.Types on product.TypeId equals type.Id
+                                                       where string.IsNullOrWhiteSpace(sTerm) || (product != null && product.ProductName.StartsWith(sTerm)) //Wyszukiwarka produktów
+                                                       select new Product
+                                                       {
+                                                           ProductId = product.ProductId,
+                                                           Image = product.Image,
+                                                           ProductName = product.ProductName,
+                                                           Description = product.Description,
+                                                           ProductPrice = product.ProductPrice,
+                                                           Type = product.Type,
+                                                           TypeName = product.TypeName,
+                                                       }).ToListAsync();
+            
+                                                       if(typeId> 0)
+                                                       {
+                                                           products = products.Where(a =>a.TypeId == typeId).ToList();
+                                                       }
+                                                       return products;
+            }                                       
+            catch (Exception)
+            {
+                Console.WriteLine("Produkt się nie załadował poprawnie");
+                 
             }
-            return products;
+            return null;
+
         }
 
         public async Task<IEnumerable<Size>> GetSizes(Product product)
@@ -50,7 +60,8 @@ namespace Infrastructures.Repositories
                                select new Size
                                {
                                  Id=size.SizeId,
-                                 NameInt=size.Size.NameInt
+                                 NameInt=size.Size.NameInt,
+                                 Namestring = size.Size.Namestring
                                }).ToListAsync();
             return sizes;
            

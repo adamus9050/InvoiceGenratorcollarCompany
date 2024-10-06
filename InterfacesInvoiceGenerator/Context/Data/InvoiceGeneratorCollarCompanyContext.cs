@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructures.Context.Data;
 
-public class InvoiceGeneratorCollarCompanyContext : IdentityUser//IdentityDbContext<IdentityUser>
+public class InvoiceGeneratorCollarCompanyContext : IdentityUser
 {
 
 

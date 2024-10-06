@@ -121,11 +121,6 @@ namespace Infrastructures.Repositories
             return materialString;
         }
 
-        public async Task<IEnumerable<Material>> GetMaterialList()
-        {
-            var material = await _db.Materials.ToListAsync();
-            return material;
-        }
         public async Task<Material> GetMaterial(int materialId)
         {
             var material = await _db.Materials.FindAsync(materialId);
@@ -143,9 +138,10 @@ namespace Infrastructures.Repositories
                                           select size; // Wybranie rozmiarów przypisanych do produktu
 
                  _db.Products.Remove(selctedProduct);
+
                 foreach(var item in selectedsize)
                 {
-                _db.sizeProducts.Remove(item); // usunięcie rozmiarów przypisanych do produktu
+                    _db.sizeProducts.Remove(item); // usunięcie rozmiarów przypisanych do produktu
 
                 }
 
@@ -163,24 +159,25 @@ namespace Infrastructures.Repositories
 
             _db.SaveChanges();
         }
-        public async Task Edit(int prodId = 0, int sizeId = 0, int materialId = 0)
-        {
-            if (prodId != 0)
-            {
-                
-            }
-            if (sizeId != 0)
-            {
-                
-            }
-            if (materialId != 0)
-            {
-                
-            }
+        //public async Task EditProduct(int prodId = 0, string productName, string description, double productprice) /*int sizeId = 0, int materialId = 0*/
+        //{
+        //    //    if (prodId != 0)
+        //    //    {
+        //    //        var existingProduct =
+        //    //        (from p in _db.Products
+        //    //         where p.ProductId == prodId
+        //    //         select p)
+        //    //        .First();
 
-            _db.SaveChanges();
-        }//do zrobienia
-        public async Task AddSizeProduct(int productId, int sizeId)
+
+        //    //        existingProduct.ProductName = productName;
+        //    //        existingProduct.Description = description;
+        //    //        existingProduct.ProductPrice = productprice;
+        //    //    }
+
+        //    //    _db.SaveChanges();
+        //    }                               //do zrobienia!!!!!!!!!!!!!!
+            public async Task AddSizeProduct(int productId, int sizeId)
         {
             SizeProduct sizeproduct = new SizeProduct();
             sizeproduct.ProductId = productId;
@@ -205,16 +202,5 @@ namespace Infrastructures.Repositories
                                     }).FirstAsync();
             return slectedSizeProduct;
         }
-
-        //public async Task<List<Product>> Search(string prodName)
-        //{
-        //    var product = from m in _db.Products
-        //                   select m;
-
-        //    product = product.Where(x => x.ProductName!.Contains(prodName));
-        //    var productid = await product.ToListAsync();
-
-        //    return productid;
-        //}
     }
 }

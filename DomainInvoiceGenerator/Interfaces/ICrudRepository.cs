@@ -13,7 +13,6 @@ namespace Domain.Interfaces
 
         public Task<Size> GetSize(int sizeId);
         public Task<IEnumerable<Size>> GetSizeList();
-        public Task<IEnumerable<Material>> GetMaterialList();
         public Task<Material> GetMaterial(int materialId);
         public Task<SizeProduct> GetSizeProduct(int productId, int sizeId);
 

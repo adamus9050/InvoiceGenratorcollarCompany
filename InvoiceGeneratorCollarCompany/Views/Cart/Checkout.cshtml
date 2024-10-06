@@ -27,8 +27,7 @@ else
     <p><strong>Kod pocztowy:</strong> @Model.User.PostCode</p>
 
     <h3>Podsumowanie zamówienia</h3>
-    <table class="table">
-        <thead>
+    <table class="table">        
             <tr>
                 <th>Nazwa materiału</th>
                 <th>Nazwa produktu</th>
@@ -37,7 +36,6 @@ else
                 <th>Cena jednostkowa</th>
                 <th>Łączna cena</th>
             </tr>
-        </thead>
         <tr>
             @foreach (var item in Model.OrderDetailsModel)
             {              
@@ -56,5 +54,4 @@ else
    
      <h4>Całkowita kwota: @Model.TotalAmount</h4>
      
-     <button class="btn-light">Generuj fakturę</button>
 }

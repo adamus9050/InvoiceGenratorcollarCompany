@@ -75,7 +75,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             else
             {
                 await _crudRepository.Delete(prodId, sizeId, materialId);               
-                return RedirectToAction("GetMaterialList");
+                return RedirectToAction("GetMaterials"); //GetMaterialList
             }
         }
 
@@ -107,10 +107,10 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         }
 
         [HttpGet]
-        public async Task <IActionResult> GetMaterialList()
+        public async Task <IActionResult> GetMaterialList() 
         {
-            var material =await _crudRepository.GetMaterialList();
-            return View("Material/GetMaterialList",material);
+            var material =await _homeRepository.GetMaterials();//GetMaterialList
+            return View("Material/GetMaterialList", material); //GetMaterialList
 
         } // lista materiałów
 
@@ -187,6 +187,12 @@ namespace InvoiceGeneratorCollarCompany.Controllers
             
             TempData["Product"] = productId;
             return RedirectToAction("Index","Home");
+        }
+
+        [HttpPost]
+        public async Task<Product> EditProduct()
+        {
+            return null;
         }
 
     }

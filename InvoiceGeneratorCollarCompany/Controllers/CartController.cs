@@ -35,7 +35,7 @@ namespace InvoiceGeneratorCollarCompany.Controllers
         {
             if (sizeId == 0)
             {
-                return RedirectToAction("ErrorAddSize", "Home"); //przeniesienie waldacji do kontrolera home
+                return RedirectToAction("ErrorAddSize", "Home"); //transfer walidation to contrroler home
             }
             else
             {
@@ -126,8 +126,8 @@ namespace InvoiceGeneratorCollarCompany.Controllers
                 };
 
                 string nazwaFaktury = $"Faktura{checkoutUserModel.Name}.xls";
-                string plik = $@"D:\Programowanie\C#\Asp.Net\InvoiceGenratorcollarCompany\Faktury\{nazwaFaktury}";
-                await _emailSender.ExcellDocGenerator($@"D:\Programowanie\C#\Asp.Net\InvoiceGenratorcollarCompany\Faktury\{nazwaFaktury}", cartDetails);
+                string plik = $@"D:\Programowanie\.Net\InvoiceGenratorcollarCompany\Faktury\{nazwaFaktury}";
+                await _emailSender.ExcellDocGenerator($@"D:\Programowanie\.Net\InvoiceGenratorcollarCompany\Faktury\{nazwaFaktury}", cartDetails);
                 await _emailSender.CreateTestMessage4(checkoutUserModel.Email, plik, "smtp.gmail.com");
                 
                 return View("Checkout", checkoutViewModel);
